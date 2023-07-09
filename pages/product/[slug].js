@@ -62,8 +62,8 @@ const ProductDetails = ({ product, products }) => {
           </div>
           <div className="buttons">
             <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
-            {/* <button type="button" className="buy-now" onClick={handleBuyNow}>Buy Now</button> */}
-            <button type="button" className="buy-now" >Buy Now</button>
+            <button type="button" className="buy-now" onClick={handleBuyNow}>Buy Now</button>
+            {/* <button type="button" className="buy-now" >Buy Now</button> */}
           </div>
         </div>
       </div>
@@ -72,8 +72,8 @@ const ProductDetails = ({ product, products }) => {
         <h2>You may also like</h2>
         <div className="marquee">
           <div className="maylike-products-container track">
-            {products.map((item) => (
-              <Product key={item._id} product={item} />
+            {products.map((item, index) => (
+              <Product key={index} product={item} />
             ))}
           </div>
         </div>
