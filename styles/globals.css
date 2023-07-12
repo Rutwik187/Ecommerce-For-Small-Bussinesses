@@ -201,22 +201,22 @@ span.text-red {
   align-items: center;
 }
 .embla__dot {
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 1.4rem;
+  height: 1.4rem;
   display: flex;
   align-items: center;
   margin-right: 0.75rem;
   margin-left: 0.75rem;
 }
 .embla__dot:after {
-  background: rgb(249, 249, 249);
+  background: #fd5c638a;
   border-radius: 0.2rem;
   width: 100%;
   height: 0.3rem;
   content: "";
 }
 .embla__dot--selected:after {
-  background: linear-gradient(45deg, rgb(47, 112, 193), rgb(116, 97, 195));
+  background: #aa0000;
 }
 
 .desc {
