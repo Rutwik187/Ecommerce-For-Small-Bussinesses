@@ -2,11 +2,13 @@ import React from 'react';
 
 import { client } from '../lib/client';
 import { Product, HeroBanner, Category } from '../components';
+import MiniBanners from '../components/MiniBanners';
 
-const Home = ({ featureProductsData, bannerData, categories }) => (
+const Home = ({ miniBannerData, featureProductsData, bannerData, categories }) => (
   <div>
 
     <HeroBanner heroBanner={bannerData} />
+    <MiniBanners miniBanner={miniBannerData} />
 
     {/* Categories  */}
 
@@ -46,10 +48,13 @@ export const getServerSideProps = async () => {
   const bannerQuery = '*[_type == "banner"]';
   const bannerData = await client.fetch(bannerQuery);
 
+  const miniBannerQuery = '*[_type == "miniBanner"]';
+  const miniBannerData = await client.fetch(miniBannerQuery);
+
 
 
   return {
-    props: { featureProductsData, categories, bannerData }
+    props: { miniBannerData, featureProductsData, categories, bannerData }
   }
 }
 

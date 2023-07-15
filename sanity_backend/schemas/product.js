@@ -52,20 +52,20 @@ export default {
       name: 'discountedPrice',
       title: 'Discounted Price',
       type: 'number',
-      validation: Rule => Rule.required(),
+
     },
 
     {
       name: 'details',
       title: 'Details',
       type: 'string',
-      validation: Rule => Rule.required(),
+
     },
     {
       name: 'featureProduct',
       title: 'Feature This Product',
       type: 'boolean',
-      validation: Rule => Rule.required(),
+
     }
   ]
 }

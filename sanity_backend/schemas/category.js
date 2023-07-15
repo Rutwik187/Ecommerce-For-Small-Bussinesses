@@ -8,7 +8,7 @@ export default {
     fields: [
         {
             name: "name",
-            title: "Name",
+            title: "Title",
             type: "string",
             validation: Rule => Rule.required(),
         },
@@ -30,6 +30,15 @@ export default {
                 hotspot: true,
             },
             validation: Rule => Rule.required(),
+        },
+        {
+            name: "categoryName",
+            title: "Category Name [Keep if blank if you don't want category name displayed or category name is already present inside image]",
+            type: "string",
+            options: {
+                hotspot: true,
+            },
+
         },
     ],
 };

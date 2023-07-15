@@ -19,7 +19,7 @@ export default {
             options: {
                 hotspot: true,
             },
-            validation: Rule => Rule.required(),
+
         },
         {
             name: "phoneNo",
@@ -31,13 +31,13 @@ export default {
             name: "email",
             title: "Email",
             type: "string",
-            validation: Rule => Rule.required(),
+
         },
         {
             name: "insta",
             title: "Instagram Url",
             type: "url",
-            validation: Rule => Rule.required(),
+
         },
 
     ],

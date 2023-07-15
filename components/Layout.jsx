@@ -35,7 +35,6 @@ const Layout = ({ children }) => {
 export const getServerSideProps = async () => {
   const infoQuery = '*[_type =="info"]';
   const infoData = await client.fetch(infoQuery);
-  console.log(infoData);
 
   return {
     props: { infoData },

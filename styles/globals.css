@@ -143,10 +143,9 @@ span.text-red {
 }
 
 .hero-banner-container {
-  background-color: #dcdcdc;
   border-radius: 15px;
   position: relative;
-  /* height: 500px; */
+
   line-height: 0.9;
   width: 100%;
 }
@@ -155,6 +154,7 @@ span.text-red {
   height: 100%;
   --slide-spacing: 1rem;
   --slide-size: 100%;
+  --mini-slide-size: 30%;
 }
 .embla__container {
   backface-visibility: hidden;
@@ -169,8 +169,21 @@ span.text-red {
 .embla__slide {
   flex: 0 0 var(--slide-size);
   min-width: 0;
-
   position: relative;
+}
+.embla__mini-slide {
+  flex: 0 0 30%;
+  min-width: 0;
+  position: relative;
+  margin: 1rem;
+}
+@media screen and (max-width: 800px) {
+  .embla__mini-slide {
+    flex: 0 0 50%;
+    min-width: 0;
+    position: relative;
+    margin: 1rem;
+  }
 }
 .embla__slide img {
   display: block;
@@ -192,7 +205,7 @@ span.text-red {
 }
 .embla__dots {
   z-index: 1;
-  bottom: 1.6rem;
+  bottom: 0rem;
   position: absolute;
   left: 0;
   right: 0;
@@ -657,9 +670,6 @@ span.text-red {
 }
 
 @media screen and (max-width: 800px) {
-  .hero-banner-container {
-    height: 560px;
-  }
   .hero-banner-image {
     width: 77%;
     height: 62%;
@@ -796,4 +806,18 @@ span.text-red {
     width: 300px;
     margin: auto;
   }
+}
+
+/* badge */
+.badge {
+  --tw-translate-x: -50%;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  padding: 0.5rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
