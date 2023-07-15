@@ -49,7 +49,7 @@ const HeroBanner = ({ heroBanner }) => {
           </div>
         </div>
       </div>
-      <div className="embla__dots">
+      {/* <div className="embla__dots">
         {scrollSnaps.map((_, index) => (
           <button
             key={index}
@@ -59,7 +59,7 @@ const HeroBanner = ({ heroBanner }) => {
             )}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

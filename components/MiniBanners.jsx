@@ -12,7 +12,7 @@ const MiniBanners = ({ miniBanner }) => {
   ]);
 
   return (
-    <div className="embla mt-16">
+    <div className="embla mt-6 md:mt-16">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {miniBanner?.map((item, index) => (
