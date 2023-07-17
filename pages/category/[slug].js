@@ -5,32 +5,28 @@ import { client, urlFor } from '../../lib/client';
 import { Product, Category } from '../../components';
 import { useStateContext } from '../../context/StateContext';
 
-const Products = ({ categories, products }) => {
+import { RelatedProducts } from '../../components';
+
+const Products = ({ categories, products, slug }) => {
     // const { image, name, sellingPrice } = products;
 
 
     return (
         <div>
-            { }
-            <div className="products-heading">
-                <h2>Best Seller Products</h2>
+            <div className='w-full max-w-[1280px] px-5 md:px-10 mx-auto'>
+                <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
+                    <h2 className='text-[28px] md:text-[34px]  font-semibold leading-tight'>Products</h2>
 
-            </div>
+                </div>
 
-            <div className="products-container">
-                {products?.map((product) => <Product key={product._id} product={product} />)}
-            </div>
-
-            <div className="maylike-products-wrapper">
-                <h2>You may also like</h2>
-                <div className="marquee">
-                    <div className="maylike-products-container track">
-                        {categories.map((item) => (
-                            <Category key={item._id} category={item} />
-                        ))}
-                    </div>
+                <div className="grid grid-cols-1 sm:2 md:grid-cols-3 lg:grid-cols-4 gap-5 my-14 px-5 md:px-0">
+                    {products?.map((product) => <Product key={product._id} product={product} />)}
                 </div>
             </div>
+
+            {/* <RelatedProducts products={categories} /> */}
+
+
         </div>
     )
 }
@@ -69,7 +65,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
 
     return {
-        props: { products, categories }
+        props: { products, categories, slug }
     }
 }
 

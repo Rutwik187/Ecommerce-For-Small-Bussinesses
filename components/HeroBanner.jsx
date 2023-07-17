@@ -37,7 +37,7 @@ const HeroBanner = ({ heroBanner }) => {
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <div className="hero-banner-container">
+    <div className="  w-full max-w-[1360px] mx-auto">
       <div className=" embla">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">

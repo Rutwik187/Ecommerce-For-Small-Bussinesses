@@ -3,21 +3,25 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
-import { urlFor } from "../lib/client";
+import "react-multi-carousel/lib/styles.css";
+import Product from "./Product";
+import Category from "./Category";
 
-const MiniBanners = ({ miniBanner }) => {
+const RelatedProducts = ({ products }) => {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [
     Autoplay({ delay: 8000, stopOnMouseEnter: true }),
     WheelGesturesPlugin(),
   ]);
 
   return (
-    <div className="embla mt-6 md:mt-16">
+    <div className="embla mt-[50px] md:mt-[100px] mb-[100px] md:mb-0">
+      {console.log(products)}
+      <div className="text-2xl font-bold mb-5">You Might Also Like</div>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {miniBanner?.map((item, index) => (
-            <div className="embla__mini-slide" key={index}>
-              <img src={urlFor(item.image).url()} alt="" />
+          {products.map((product) => (
+            <div className="embla__product-slide">
+              <Product key={product._id} product={product} />
             </div>
           ))}
         </div>
@@ -26,4 +30,4 @@ const MiniBanners = ({ miniBanner }) => {
   );
 };
 
-export default MiniBanners;
+export default RelatedProducts;

@@ -11,11 +11,11 @@ const Category = ({ category: { image, categoryName, slug } }) => {
           <img
             src={urlFor(image).url()}
             alt=""
-            class="object-cover w-full rounded transition duration-500 group-hover:scale-105"
+            className="object-cover w-full rounded transition duration-500 group-hover:scale-105"
           />
 
-          <div class="mt-3">
-            <h3 class="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4 text-center">
+          <div className="mt-3">
+            <h3 className="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4 text-center">
               {categoryName}
             </h3>
           </div>

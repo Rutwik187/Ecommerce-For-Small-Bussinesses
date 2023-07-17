@@ -36,6 +36,12 @@ export default {
       validation: Rule => Rule.required(),
     },
     {
+      name: 'quantityMass',
+      title: 'Quantity [also mention unit eg. kg, gm, liters]',
+      type: 'string',
+
+    },
+    {
       name: "category",
       title: "Category",
       type: "reference",
@@ -46,7 +52,7 @@ export default {
       name: 'listPrice',
       title: 'List Price',
       type: 'number',
-      validation: Rule => Rule.required(),
+
     },
     {
       name: 'discountedPrice',
@@ -56,9 +62,9 @@ export default {
     },
 
     {
-      name: 'details',
-      title: 'Details',
-      type: 'string',
+      name: 'description',
+      type: 'blockContent',
+      title: 'Description',
 
     },
     {

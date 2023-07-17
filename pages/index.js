@@ -4,6 +4,7 @@ import { client } from '../lib/client';
 import { Product, HeroBanner, Category } from '../components';
 import MiniBanners from '../components/MiniBanners';
 
+
 const Home = ({ miniBannerData, featureProductsData, bannerData, categories }) => (
   <div>
 
@@ -12,26 +13,29 @@ const Home = ({ miniBannerData, featureProductsData, bannerData, categories }) =
 
     {/* Categories  */}
 
-    <div className="products-heading mt-10 md:mt-20">
-      <h2>Product Categories</h2>
-      <p>Categories of product we have</p>
-    </div>
+    <div className='w-full max-w-[1280px] px-5 md:px-10 mx-auto'>
+      <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
+        <h2 className='text-[28px] md:text-[34px]  font-semibold leading-tight'>Shop by categories</h2>
 
-    <div className="products-container mb-10 md:mb-20">
-      {categories?.map((category) => <Category key={category._id} category={category} />)}
+      </div>
+
+      <div className="flex flex-wrap gap-5 my-14 px-5 md:px-0 items-center justify-center">
+        {categories?.map((category) => <Category key={category._id} category={category} />)}
+      </div>
     </div>
 
     {/* Featured Products */}
 
-    <div className="products-heading  mb-10 md:mb-20">
-      <h2>Best Seller Products</h2>
-      <p>speaker There are many variations passages</p>
-    </div>
+    <div className='w-full max-w-[1280px] px-5 md:px-10 mx-auto'>
+      <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
+        <h2 className='text-[28px] md:text-[34px]  font-semibold leading-tight'>Our Featured Products</h2>
 
-    <div className="products-container mb-10 md:mb-20">
-      {featureProductsData?.map((product) => <Product key={product._id} product={product} />)}
-    </div>
+      </div>
 
+      <div className="grid grid-cols-1 sm:2 md:grid-cols-3 lg:grid-cols-4 gap-5 my-14 px-5 md:px-0">
+        {featureProductsData?.map((product) => <Product key={product._id} product={product} />)}
+      </div>
+    </div>
   </div>
 );
 

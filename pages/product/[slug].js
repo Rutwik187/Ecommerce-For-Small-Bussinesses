@@ -1,83 +1,153 @@
 import React, { useState } from 'react';
-import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
-import { client, urlFor } from '../../lib/client';
-import { Product } from '../../components';
-import { useStateContext } from '../../context/StateContext';
+import { client } from '../../lib/client';
+import { Product, RelatedProducts } from '../../components';
+
+import { IoMdHeartEmpty } from "react-icons/io";
+import Wrapper from "../../components/Wrapper";
+import ProductDetailsCarousel from "../../components/ProductDetailsCarousel";
+import { PortableText } from "@portabletext/react";
+import { RichTextComponent } from '../../components/RichTextComponent';
+
+
+// import ReactMarkdown from "react-markdown";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../store/cartSlice";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const ProductDetails = ({ product, products }) => {
-  const { image, name, details, sellingPrice } = product;
-  const [index, setIndex] = useState(0);
-  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+  const { image, name, description, listPrice, discountedPrice } = product;
+  const dispatch = useDispatch();
 
-  const handleBuyNow = () => {
-    onAdd(product, qty);
+  const notify = () => {
+    toast.success("Success. Check your cart!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
-    setShowCart(true);
-  }
+
 
   return (
     <div>
-      <div className="product-detail-container">
-        <div>
-          <div className="image-container">
-            <img src={urlFor(image && image[index]).url()} className="product-detail-image" />
-          </div>
-          <div className="small-images-container">
-            {image?.map((item, i) => (
-              <img
-                key={i}
-                src={urlFor(item).url()}
-                className={i === index ? 'small-image selected-image' : 'small-image'}
-                onMouseEnter={() => setIndex(i)}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="product-detail-desc">
-          <h1>{name}</h1>
-          <div className="reviews">
-            <div>
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiOutlineStar />
+      <div className="w-full md:py-20">
+        <ToastContainer />
+        <Wrapper>
+          <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
+            {/* left column start */}
+            <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
+              <ProductDetailsCarousel images={image} />
             </div>
-            <p>
-              (20)
-            </p>
+            {/* left column end */}
+
+            {/* right column start */}
+            <div className="flex-[1] py-3">
+              {/* PRODUCT TITLE */}
+              <div className="text-[34px] font-semibold mb-2 leading-tight">
+                {name}
+              </div>
+
+              {/* PRODUCT SUBTITLE */}
+              <div className="text-lg font-semibold mb-5">
+                {name}
+              </div>
+
+              {/* PRODUCT PRICE */}
+              <div className="flex items-center">
+                <p className="mr-2 text-lg font-semibold">
+                  MRP : &#8377;{discountedPrice}
+                </p>
+                {listPrice && (
+                  <>
+                    <p className="text-base  font-medium line-through">
+                      &#8377;{listPrice}
+                    </p>
+                    <p className="ml-auto text-base font-medium text-green-500">
+                      {Math.round(((listPrice - discountedPrice) / listPrice) * 100)}
+                      % off
+                    </p>
+                  </>
+                )}
+              </div>
+
+              <div className="text-md font-medium text-black/[0.5]">
+                incl. of taxes
+              </div>
+              <div className="text-md font-medium text-black/[0.5] mb-20">
+                {`(Also includes all applicable duties)`}
+              </div>
+
+
+
+              {/* ADD TO CART BUTTON START */}
+              <button
+                className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
+                onClick={() => {
+                  console.log(product)
+                  dispatch(
+                    addToCart({
+                      ...product,
+                      oneQuantityPrice: discountedPrice,
+                    })
+                  );
+                  notify();
+
+                }}
+
+              >
+                Add to Cart
+              </button>
+              {/* ADD TO CART BUTTON END */}
+
+              {/* WHISHLIST BUTTON START */}
+              {/* <button className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10">
+                Whishlist
+                <IoMdHeartEmpty size={20} />
+              </button> */}
+              {/* WHISHLIST BUTTON END */}
+
+              <div>
+                <div className="text-lg font-bold mb-5">
+                  Product Details
+                </div>
+                <div className="markdown text-md mb-5">
+
+                  <PortableText
+                    // Pass in block content straight from Sanity.io
+                    value={description}
+                  // components={RichTextComponent}
+                  />
+                </div>
+              </div>
+            </div>
+            {/* right column end */}
           </div>
-          <h4>Details: </h4>
-          <p>{details}</p>
-          <p className="price">${sellingPrice}</p>
-          <div className="quantity">
-            <h3>Quantity:</h3>
-            <p className="quantity-desc">
-              <span className="minus" onClick={decQty}><AiOutlineMinus /></span>
-              <span className="num">{qty}</span>
-              <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
-            </p>
-          </div>
-          <div className="buttons">
-            <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
-            {/* <button type="button" className="buy-now" onClick={handleBuyNow}>Buy Now</button> */}
-            <button type="button" className="buy-now" >Buy Now</button>
-          </div>
-        </div>
+
+          <RelatedProducts products={products} />
+
+          {/* <div className="maylike-products-wrapper">
+            <h2>You may also like</h2>
+            <div className="marquee">
+              <div className="maylike-products-container track">
+                {products.map((item) => (
+                  <Product key={item._id} product={item} />
+                ))}
+              </div>
+            </div>
+          </div> */}
+        </Wrapper>
       </div>
 
-      <div className="maylike-products-wrapper">
-        <h2>You may also like</h2>
-        <div className="marquee">
-          <div className="maylike-products-container track">
-            {products.map((item) => (
-              <Product key={item._id} product={item} />
-            ))}
-          </div>
-        </div>
-      </div>
+
     </div>
   )
 }
