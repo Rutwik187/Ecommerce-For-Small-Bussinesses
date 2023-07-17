@@ -10,7 +10,7 @@ const Product = ({
     <div>
       <Link href={`/product/${slug.current}`}>
         <div
-          className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer h-full"
+          className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer h-full mx-auto"
           style={{
             border: "0.5px solid rgb(232, 232, 232)",
             boxShadow: "rgba(0, 0, 0, 0.04) 2px 2px 8px",
