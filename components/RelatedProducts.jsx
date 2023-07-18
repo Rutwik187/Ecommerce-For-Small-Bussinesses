@@ -15,7 +15,6 @@ const RelatedProducts = ({ products }) => {
 
   return (
     <div className="embla mt-[50px] md:mt-[100px] mb-[100px] md:mb-0">
-      {console.log(products)}
       <div className="text-2xl font-bold mb-5">You Might Also Like</div>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">

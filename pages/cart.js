@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 
 
+
 const Cart = () => {
     const [loading, setLoading] = useState(false);
 
@@ -31,7 +32,6 @@ const Cart = () => {
             });
         } catch (error) {
             setLoading(false);
-            console.log(error);
         }
     };
 
@@ -102,8 +102,8 @@ const Cart = () => {
                 {/* This is empty screen */}
                 {cartItems.length < 1 && (
                     <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
-                        <Image
-                            src="/empty-cart.jpg"
+                        <img
+                            src="../src/assets/empty-cart.jpg"
                             width={300}
                             height={300}
                             className="w-[300px] md:w-[400px]"

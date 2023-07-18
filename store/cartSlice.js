@@ -18,7 +18,6 @@ export const cartSlice = createSlice({
             }
         },
         updateCart: (state, action) => {
-            console.log(action.payload)
             state.cartItems = state.cartItems.map((p) => {
 
                 if (p._id === action.payload.id) {
