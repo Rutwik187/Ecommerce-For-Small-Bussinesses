@@ -1,10 +1,8 @@
 import React, { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import Wrapper from "../components/Wrapper";
 import CartItem from "../components/CartItem";
 import { useSelector } from "react-redux";
-
 
 
 
@@ -15,7 +13,7 @@ const Cart = () => {
 
     const subTotal = useMemo(() => {
         return cartItems.reduce(
-            (total, val) => total + val.discountedPrice,
+            (total, val) => total + val.productTotal,
             0
         );
     }, [cartItems]);
@@ -103,7 +101,7 @@ const Cart = () => {
                 {cartItems.length < 1 && (
                     <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
                         <img
-                            src="../src/assets/empty-cart.jpg"
+                            src="https://www.selectgp.com/content/images/empty-cart.png"
                             width={300}
                             height={300}
                             className="w-[300px] md:w-[400px]"
@@ -116,12 +114,15 @@ const Cart = () => {
                             <br />
                             Go ahead and explore top categories.
                         </span>
-                        <Link
-                            href="/"
-                            className="py-4 px-8 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8"
-                        >
-                            Continue Shopping
-                        </Link>
+                        <div className="py-4 px-8 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8">
+                            <Link
+                                href="/"
+
+                            >
+
+                                Continue Shopping
+                            </Link>
+                        </div>
                     </div>
                 )}
             </Wrapper>

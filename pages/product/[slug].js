@@ -31,9 +31,18 @@ const ProductDetails = ({ product, products }) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "dark",
+      theme: "light",
     });
   };
+
+  const [quantityNum, setQuantityNum] = useState(1)
+
+  const increment = () => {
+    quantityNum < 100 ? setQuantityNum((prevCount) => prevCount + 1) : 'Contact dealer for more quantity'
+  }
+  const decrement = () => {
+    quantityNum > 0 ? setQuantityNum((prevCount) => prevCount - 1) : 0
+  }
 
 
 
@@ -82,22 +91,23 @@ const ProductDetails = ({ product, products }) => {
               <div className="text-md font-medium text-black/[0.5]">
                 incl. of taxes
               </div>
-              <div className="text-md font-medium text-black/[0.5] mb-20">
+              <div className="text-md font-medium text-black/[0.5] mb-4">
                 {`(Also includes all applicable duties)`}
               </div>
 
 
               {/* Product Quantity */}
-              <div class="mt-2">
-                <label class="text-gray-700 text-sm" for="count">Count:</label>
+              <div class="mb-16">
+                <label class="mr-2 text-lg font-semibold" for="count">Quantity:</label>
                 <div class="flex items-center mt-1">
-                  <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <button onClick={() => decrement()} className="  text-lg font-medium transition-transform active:scale-95  hover:opacity-75">
+                    <svg className="h-9 w-9" fill="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="white"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   </button>
-                  <span class="text-gray-700 text-lg mx-2">20</span>
-                  <button class="text-gray-500 focus:outline-none focus:text-gray-600">
-                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span className="text-gray-900 text-2xl mx-2 font-semibold">{quantityNum}</span>
+                  <button onClick={() => increment()} class="text-gray-500 focus:outline-none focus:text-gray-600">
+                    <svg className="h-9 w-9" fill="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="white"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   </button>
+
                 </div>
               </div>
 
@@ -110,6 +120,8 @@ const ProductDetails = ({ product, products }) => {
                     addToCart({
                       ...product,
                       oneQuantityPrice: discountedPrice,
+                      quantityNum: quantityNum,
+                      productTotal: discountedPrice * quantityNum,
                     })
                   );
                   notify();
@@ -147,16 +159,7 @@ const ProductDetails = ({ product, products }) => {
 
           <RelatedProducts products={products} />
 
-          {/* <div className="maylike-products-wrapper">
-            <h2>You may also like</h2>
-            <div className="marquee">
-              <div className="maylike-products-container track">
-                {products.map((item) => (
-                  <Product key={item._id} product={item} />
-                ))}
-              </div>
-            </div>
-          </div> */}
+
         </Wrapper>
       </div>
 

@@ -11,18 +11,18 @@ export const cartSlice = createSlice({
                 (p) => p._id === action.payload._id
             );
             if (item) {
-                item.quantity++;
-                item.discountedPrice = item.oneQuantityPrice * item.quantity;
+                item.quantityNum++;
+                item.productTotal = item.productTotal + item.oneQuantityPrice;
             } else {
-                state.cartItems.push({ ...action.payload, quantity: 1 });
+                state.cartItems.push({ ...action.payload });
             }
         },
         updateCart: (state, action) => {
             state.cartItems = state.cartItems.map((p) => {
 
                 if (p._id === action.payload.id) {
-                    if (action.payload.key === "quantity") {
-                        p.discountedPrice =
+                    if (action.payload.key === "quantityNum") {
+                        p.productTotal =
                             p.oneQuantityPrice * action.payload.val;
                     }
                     return { ...p, [action.payload.key]: action.payload.val };

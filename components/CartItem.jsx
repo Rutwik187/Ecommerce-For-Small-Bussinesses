@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { updateCart, removeFromCart } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
@@ -13,6 +13,7 @@ const CartItem = ({ data }) => {
     listPrice,
     discountedPrice,
     _id,
+    quantityNum,
   } = data;
 
   const dispatch = useDispatch();
@@ -20,10 +21,26 @@ const CartItem = ({ data }) => {
   const updateCartItem = (e, key) => {
     let payload = {
       key,
-      val: key === "quantity" ? parseInt(e.target.value) : e.target.value,
+      val:
+        key === "quantityNum" ? parseInt(quantityNumUpdate) : quantityNumUpdate,
       id: _id,
     };
     dispatch(updateCart(payload));
+  };
+
+  const [quantityNumUpdate, setQuantityNumUpdate] = useState(quantityNum);
+
+  const increment = () => {
+    quantityNum < 100
+      ? setQuantityNumUpdate((prevCount) => prevCount + 1)
+      : "Contact dealer for more quantity";
+    updateCartItem(quantityNumUpdate, "quantityNum");
+  };
+  const decrement = () => {
+    quantityNumUpdate > 0
+      ? setQuantityNumUpdate((prevCount) => prevCount - 1)
+      : 0;
+    updateCartItem(quantityNumUpdate, "quantityNum");
   };
 
   return (
@@ -55,14 +72,15 @@ const CartItem = ({ data }) => {
 
         {/* PRODUCT SUBTITLE */}
         <div className="text-md font-medium text-black/[0.5] hidden md:block">
-          {quantityMass}
+          {quantity}
         </div>
 
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center gap-2 md:gap-10 text-black/[0.5] text-sm md:text-md">
             <div className="flex items-center gap-1">
-              <div className="font-semibold">Quantity:</div>
-              <select
+              {/* <div className="font-semibold">Quantity:</div> */}
+              {/* {quantityNum} */}
+              {/* <select
                 className="hover:text-black"
                 onChange={(e) => updateCartItem(e, "quantity")}
               >
@@ -73,7 +91,49 @@ const CartItem = ({ data }) => {
                     </option>
                   );
                 })}
-              </select>
+              </select> */}
+              <div class=" flex items-center justify-center">
+                <label class="mr-2 text-lg font-semibold" for="count">
+                  Quantity:
+                </label>
+                <div class="flex items-center mt-1">
+                  <button
+                    onClick={() => decrement()}
+                    className="  text-lg font-medium transition-transform active:scale-95  hover:opacity-75"
+                  >
+                    <svg
+                      className="h-7 w-7"
+                      fill="black"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      stroke="white"
+                    >
+                      <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </button>
+                  <span className="text-gray-900 text-xl mx-2 font-semibold">
+                    {quantityNumUpdate}
+                  </span>
+                  <button
+                    onClick={() => increment()}
+                    class="text-gray-500 focus:outline-none focus:text-gray-600"
+                  >
+                    <svg
+                      className="h-7 w-7"
+                      fill="black"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      stroke="white"
+                    >
+                      <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <RiDeleteBin6Line
