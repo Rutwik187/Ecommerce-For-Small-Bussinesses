@@ -1,14 +1,17 @@
-import Image from "next/image";
 import React, { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { updateCart, removeFromCart } from "../store/cartSlice";
+import {
+  increaseCount,
+  decreaseCount,
+  removeFromCart,
+} from "../store/cartSlice";
 import { useDispatch } from "react-redux";
 import { urlFor } from "../lib/client";
 const CartItem = ({ data }) => {
   const {
     image,
     name,
-    quantityMass,
+    count,
     quantity,
     listPrice,
     discountedPrice,
@@ -18,30 +21,30 @@ const CartItem = ({ data }) => {
 
   const dispatch = useDispatch();
 
-  const updateCartItem = (e, key) => {
-    let payload = {
-      key,
-      val:
-        key === "quantityNum" ? parseInt(quantityNumUpdate) : quantityNumUpdate,
-      id: _id,
-    };
-    dispatch(updateCart(payload));
-  };
+  // const updateCartItem = (e, key) => {
+  //   let payload = {
+  //     key,
+  //     val:
+  //       key === "quantityNum" ? parseInt(quantityNumUpdate) : quantityNumUpdate,
+  //     id: _id,
+  //   };
+  //   dispatch(updateCart(payload));
+  // };
 
-  const [quantityNumUpdate, setQuantityNumUpdate] = useState(quantityNum);
+  // const [quantityNumUpdate, setQuantityNumUpdate] = useState(quantityNum);
 
-  const increment = () => {
-    quantityNum < 100
-      ? setQuantityNumUpdate((prevCount) => prevCount + 1)
-      : "Contact dealer for more quantity";
-    updateCartItem(quantityNumUpdate, "quantityNum");
-  };
-  const decrement = () => {
-    quantityNumUpdate > 0
-      ? setQuantityNumUpdate((prevCount) => prevCount - 1)
-      : 0;
-    updateCartItem(quantityNumUpdate, "quantityNum");
-  };
+  // const increment = () => {
+  //   quantityNum < 100
+  //     ? setQuantityNumUpdate((prevCount) => prevCount + 1)
+  //     : "Contact dealer for more quantity";
+  //   updateCartItem(quantityNumUpdate, "quantityNum");
+  // };
+  // const decrement = () => {
+  //   quantityNumUpdate > 0
+  //     ? setQuantityNumUpdate((prevCount) => prevCount - 1)
+  //     : 0;
+  //   updateCartItem(quantityNumUpdate, "quantityNum");
+  // };
 
   return (
     <div className="flex py-5 gap-3 md:gap-5 border-b">
@@ -78,27 +81,15 @@ const CartItem = ({ data }) => {
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center gap-2 md:gap-10 text-black/[0.5] text-sm md:text-md">
             <div className="flex items-center gap-1">
-              {/* <div className="font-semibold">Quantity:</div> */}
-              {/* {quantityNum} */}
-              {/* <select
-                className="hover:text-black"
-                onChange={(e) => updateCartItem(e, "quantity")}
-              >
-                {Array.from({ length: 10 }, (_, i) => i + 1).map((q, i) => {
-                  return (
-                    <option key={i} value={q} selected={quantity === q}>
-                      {q}
-                    </option>
-                  );
-                })}
-              </select> */}
               <div class=" flex items-center justify-center">
                 <label class="mr-2 text-lg font-semibold" for="count">
                   Quantity:
                 </label>
                 <div class="flex items-center mt-1">
                   <button
-                    onClick={() => decrement()}
+                    onClick={() => {
+                      dispatch(decreaseCount({ id: _id }));
+                    }}
                     className="  text-lg font-medium transition-transform active:scale-95  hover:opacity-75"
                   >
                     <svg
@@ -114,10 +105,10 @@ const CartItem = ({ data }) => {
                     </svg>
                   </button>
                   <span className="text-gray-900 text-xl mx-2 font-semibold">
-                    {quantityNumUpdate}
+                    {count}
                   </span>
                   <button
-                    onClick={() => increment()}
+                    onClick={() => dispatch(increaseCount({ id: _id }))}
                     class="text-gray-500 focus:outline-none focus:text-gray-600"
                   >
                     <svg

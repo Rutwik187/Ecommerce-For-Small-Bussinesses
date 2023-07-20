@@ -35,14 +35,9 @@ const ProductDetails = ({ product, products }) => {
     });
   };
 
-  const [quantityNum, setQuantityNum] = useState(1)
+  const [count, setCount] = useState(1)
 
-  const increment = () => {
-    quantityNum < 100 ? setQuantityNum((prevCount) => prevCount + 1) : 'Contact dealer for more quantity'
-  }
-  const decrement = () => {
-    quantityNum > 0 ? setQuantityNum((prevCount) => prevCount - 1) : 0
-  }
+
 
 
 
@@ -100,11 +95,11 @@ const ProductDetails = ({ product, products }) => {
               <div class="mb-16">
                 <label class="mr-2 text-lg font-semibold" for="count">Quantity:</label>
                 <div class="flex items-center mt-1">
-                  <button onClick={() => decrement()} className="  text-lg font-medium transition-transform active:scale-95  hover:opacity-75">
+                  <button onClick={() => { setCount(Math.max(count - 1, 1)) }} className="  text-lg font-medium transition-transform active:scale-95  hover:opacity-75">
                     <svg className="h-9 w-9" fill="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="white"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   </button>
-                  <span className="text-gray-900 text-2xl mx-2 font-semibold">{quantityNum}</span>
-                  <button onClick={() => increment()} class="text-gray-500 focus:outline-none focus:text-gray-600">
+                  <span className="text-gray-900 text-2xl mx-2 font-semibold">{count}</span>
+                  <button onClick={() => { setCount(count + 1) }} class="text-gray-500 focus:outline-none focus:text-gray-600">
                     <svg className="h-9 w-9" fill="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="white"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   </button>
 
@@ -118,14 +113,13 @@ const ProductDetails = ({ product, products }) => {
                 onClick={() => {
                   dispatch(
                     addToCart({
-                      ...product,
-                      oneQuantityPrice: discountedPrice,
-                      quantityNum: quantityNum,
-                      productTotal: discountedPrice * quantityNum,
+                      item: {
+                        ...product,
+                        count
+                      }
                     })
                   );
                   notify();
-
                 }}
 
               >

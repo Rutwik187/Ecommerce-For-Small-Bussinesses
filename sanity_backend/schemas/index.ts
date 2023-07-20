@@ -6,4 +6,5 @@ import post from './post'
 import info from "./info"
 import blockContent from "./blockContent"
 import miniBanner from "./miniBanner"
-export const schemaTypes = [blockContent,info,category, product, banner,miniBanner, post]
+import coupon from "./Coupon"
+export const schemaTypes = [blockContent,info,category, product, banner,miniBanner, post,coupon]
