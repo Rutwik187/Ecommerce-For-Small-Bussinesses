@@ -37,7 +37,7 @@ export default {
     },
     {
       name: 'quantityMass',
-      title: 'Quantity [also mention unit eg. kg, gm, liters]',
+      title: 'quantity [also mention unit eg. kg, gm, liters]',
       type: 'string',
 
     },
@@ -50,14 +50,15 @@ export default {
     },
     {
       name: 'listPrice',
-      title: 'List Price',
+      title: 'List Price [MRP of Product]',
       type: 'number',
 
     },
     {
       name: 'discountedPrice',
-      title: 'Discounted Price',
+      title: 'Discounted Price [Price after discounting]',
       type: 'number',
+      validation: Rule => Rule.max(Rule.valueOfField('listPrice'))
 
     },
 

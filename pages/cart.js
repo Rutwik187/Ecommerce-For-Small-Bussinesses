@@ -1,26 +1,72 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Wrapper from "../components/Wrapper";
 import CartItem from "../components/CartItem";
 import { useSelector } from "react-redux";
+import { client } from "../lib/client";
+import { RiCoupon4Line } from "react-icons/ri";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const Cart = ({ coupons }) => {
 
+    const failureToast = () => {
+        toast.error("Invalid Coupon!!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    };
 
-const Cart = () => {
+    const [couponValid, setCouponValid] = useState(false)
+    const [percentDiscount, setPercentDiscount] = useState(0)
     const [loading, setLoading] = useState(false);
+    const inputRef = useRef(null)
+
 
     const cart = useSelector((state) => state.cart.cart);
 
-    const discount = 20;
+
+    const successToast = () => {
+        toast.success(`Congratulation got ${percentDiscount}% Off`, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    };
+    const handleValidCoupon = () => {
+        const enteredCoupon = inputRef.current.value
+        for (const couponObj of coupons) {
+            if (couponObj.coupon === enteredCoupon) {
+                setCouponValid(true)
+                setPercentDiscount(couponObj.percentageDiscount)
+                successToast()
+                break
+            }
+            else {
+                failureToast()
+                setCouponValid(false)
+                setPercentDiscount(0)
+
+            }
+        }
+    }
+
 
     const totalPrice = cart.reduce((total, item) => {
         const totalAmount = total + item.count * item.discountedPrice;
-        return totalAmount - (totalAmount * (discount / 100))
+        return totalAmount - (totalAmount * (percentDiscount / 100))
     }, 0)
-    // const discountedTotal = (totalPrice) => {
-    //     total
-    //     return 
-    // }
 
     const handlePayment = async () => {
         try {
@@ -39,6 +85,7 @@ const Cart = () => {
 
     return (
         <div className="w-full md:py-20">
+            {console.log(percentDiscount)}
             <Wrapper>
                 {cart.length > 0 && (
                     <>
@@ -85,16 +132,18 @@ const Cart = () => {
                                     </div>
                                 </div>
 
-                                <div class="p-4">
-                                    <p class="text-sm md:text-md py-5 border-t ">If you have a coupon code, please enter it in the box below</p>
-                                    <div class="justify-center md:flex">
+                                <div className="p-4">
+                                    <p className="text-sm md:text-md py-5 border-t ">If you have a coupon code, please enter it in the box below</p>
+                                    <div className="justify-start md:flex">
                                         <form action="" method="POST">
-                                            <div class="flex items-center w-full h-13 pl-3  bg-gray-100 border rounded-full">
-                                                <input type="coupon" name="code" id="coupon" placeholder="Apply coupon"
-                                                    class="w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none" />
-                                                <button type="submit" class="text-sm flex items-center px-3 py-3  text-white bg-black rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none">
-                                                    <svg aria-hidden="true" data-prefix="fas" data-icon="gift" class="w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 448c0 17.7 14.3 32 32 32h160V320H32v128zm256 32h160c17.7 0 32-14.3 32-32V320H288v160zm192-320h-42.1c6.2-12.1 10.1-25.5 10.1-40 0-48.5-39.5-88-88-88-41.6 0-68.5 21.3-103 68.3-34.5-47-61.4-68.3-103-68.3-48.5 0-88 39.5-88 88 0 14.5 3.8 27.9 10.1 40H32c-17.7 0-32 14.3-32 32v80c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16v-80c0-17.7-14.3-32-32-32zm-326.1 0c-22.1 0-40-17.9-40-40s17.9-40 40-40c19.9 0 34.6 3.3 86.1 80h-86.1zm206.1 0h-86.1c51.4-76.5 65.7-80 86.1-80 22.1 0 40 17.9 40 40s-17.9 40-40 40z" /></svg>
-                                                    <span class="font-medium">Apply</span>
+                                            <div className="flex items-center w-full h-13 pl-3  bg-gray-100 border rounded-full">
+
+                                                <input ref={inputRef} type="coupon" name="code" id="coupon" placeholder="Apply coupon"
+                                                    className="w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none" />
+
+                                                <button onClick={handleValidCoupon} type="button" className="text-sm flex items-center px-3 py-3  text-white bg-black rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none">
+                                                    <RiCoupon4Line />
+                                                    <span className="font-medium ml-2">Apply</span>
                                                 </button>
                                             </div>
                                         </form>
@@ -152,3 +201,13 @@ const Cart = () => {
 };
 
 export default Cart;
+
+export const getStaticProps = async () => {
+    const coupons = await client.fetch(`*[_type == 'coupon']`)
+
+    return {
+        props: {
+            coupons
+        }
+    }
+}

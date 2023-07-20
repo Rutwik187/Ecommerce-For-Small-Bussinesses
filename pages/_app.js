@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
+import { ToastContainer } from "react-toastify";
 
 import { Layout } from '../components';
 import '../styles/globals.css';
@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <StateContext>
       <Layout>
-        <Toaster />
+        <ToastContainer />
         <Component {...pageProps} />
       </Layout>
     </StateContext>

@@ -13,7 +13,7 @@ export default {
         title: 'Percentage Discount [*no need to enter percentage symbol]',
         type: 'number',
 
-        validation: Rule => Rule.required(),
+        validation: Rule => Rule.required().max(100),
     },
     ],
 };

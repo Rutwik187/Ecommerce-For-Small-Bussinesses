@@ -14,7 +14,7 @@ import { RichTextComponent } from '../../components/RichTextComponent';
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
@@ -23,7 +23,7 @@ const ProductDetails = ({ product, products }) => {
   const dispatch = useDispatch();
 
   const notify = () => {
-    toast.success("Success. Check your cart!", {
+    toast.success(`Added ${name} to your cart!`, {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -44,7 +44,7 @@ const ProductDetails = ({ product, products }) => {
   return (
     <div>
       <div className="w-full md:py-20">
-        <ToastContainer />
+
         <Wrapper>
           <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
             {/* left column start */}
