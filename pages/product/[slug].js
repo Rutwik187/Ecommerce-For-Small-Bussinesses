@@ -16,9 +16,10 @@ import { addToCart } from "../../store/cartSlice";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from '../../components/Header';
 
 
-const ProductDetails = ({ product, products }) => {
+const ProductDetails = ({ product, products, productData }) => {
   const { image, name, description, listPrice, discountedPrice } = product;
   const dispatch = useDispatch();
 
@@ -43,6 +44,7 @@ const ProductDetails = ({ product, products }) => {
 
   return (
     <div>
+      <Header product={productData} />
       <div className="w-full md:py-20">
 
         <Wrapper>

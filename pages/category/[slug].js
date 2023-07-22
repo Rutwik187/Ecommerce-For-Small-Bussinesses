@@ -6,13 +6,15 @@ import { Product, Category } from '../../components';
 import { useStateContext } from '../../context/StateContext';
 
 import { RelatedProducts } from '../../components';
+import Header from '../../components/Header';
 
-const Products = ({ categories, products, slug }) => {
+const Products = ({ categories, products, slug, productData }) => {
     // const { image, name, sellingPrice } = products;
 
 
     return (
         <div>
+            <Header product={productData} />
             <div className='w-full max-w-[1280px] px-5 md:px-10 mx-auto'>
                 <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
                     <h2 className='text-[28px] md:text-[34px]  font-semibold leading-tight'>Products</h2>

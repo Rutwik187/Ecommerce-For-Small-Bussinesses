@@ -7,8 +7,9 @@ import { client } from "../lib/client";
 import { RiCoupon4Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "../components/Header";
 
-const Cart = ({ coupons }) => {
+const Cart = ({ coupons, productData }) => {
 
     const failureToast = () => {
         toast.error("Invalid Coupon!!", {
@@ -84,118 +85,121 @@ const Cart = ({ coupons }) => {
     };
 
     return (
-        <div className="w-full md:py-20">
-            {console.log(percentDiscount)}
-            <Wrapper>
-                {cart.length > 0 && (
-                    <>
-                        {/* HEADING AND PARAGRAPH START */}
-                        <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
-                            <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
-                                Shopping Cart
-                            </div>
-                        </div>
-                        {/* HEADING AND PARAGRAPH END */}
+        <div>
+            <Header product={productData} />
+            <div className="w-full md:py-20">
 
-                        {/* CART CONTENT START */}
-                        <div className="flex flex-col lg:flex-row gap-12 py-10">
-                            {/* CART ITEMS START */}
-                            <div className="flex-[2]">
-                                <div className="text-lg font-bold">
-                                    Cart Items
+                <Wrapper>
+                    {cart.length > 0 && (
+                        <>
+                            {/* HEADING AND PARAGRAPH START */}
+                            <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
+                                <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
+                                    Shopping Cart
                                 </div>
-                                {cart.map((item, index) => (
-                                    <CartItem key={index} data={item} />
-                                ))}
                             </div>
-                            {/* CART ITEMS END */}
+                            {/* HEADING AND PARAGRAPH END */}
 
-                            {/* SUMMARY START */}
-                            <div className="flex-[1]">
-                                <div className="text-lg font-bold">Summary</div>
-
-                                <div className="p-5 my-5 bg-black/[0.05] rounded-xl">
-                                    <div className="flex justify-between">
-                                        <div className="uppercase text-md md:text-lg font-medium text-black">
-                                            Subtotal
-                                        </div>
-                                        <div className="text-md md:text-lg font-medium text-black">
-                                            &#8377;{totalPrice}
-                                        </div>
+                            {/* CART CONTENT START */}
+                            <div className="flex flex-col lg:flex-row gap-12 py-10">
+                                {/* CART ITEMS START */}
+                                <div className="flex-[2]">
+                                    <div className="text-lg font-bold">
+                                        Cart Items
                                     </div>
-                                    <div className="text-sm md:text-md py-5 border-t mt-5">
-                                        The subtotal reflects the total price of
-                                        your order, including duties and taxes,
-                                        before any applicable discounts. It does
-                                        not include delivery costs and
-                                        international transaction fees.
-                                    </div>
+                                    {cart.map((item, index) => (
+                                        <CartItem key={index} data={item} />
+                                    ))}
                                 </div>
+                                {/* CART ITEMS END */}
 
-                                <div className="p-4">
-                                    <p className="text-sm md:text-md py-5 border-t ">If you have a coupon code, please enter it in the box below</p>
-                                    <div className="justify-start md:flex">
-                                        <form action="" method="POST">
-                                            <div className="flex items-center w-full h-13 pl-3  bg-gray-100 border rounded-full">
+                                {/* SUMMARY START */}
+                                <div className="flex-[1]">
+                                    <div className="text-lg font-bold">Summary</div>
 
-                                                <input ref={inputRef} type="coupon" name="code" id="coupon" placeholder="Apply coupon"
-                                                    className="w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none" />
-
-                                                <button onClick={handleValidCoupon} type="button" className="text-sm flex items-center px-3 py-3  text-white bg-black rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none">
-                                                    <RiCoupon4Line />
-                                                    <span className="font-medium ml-2">Apply</span>
-                                                </button>
+                                    <div className="p-5 my-5 bg-black/[0.05] rounded-xl">
+                                        <div className="flex justify-between">
+                                            <div className="uppercase text-md md:text-lg font-medium text-black">
+                                                Subtotal
                                             </div>
-                                        </form>
+                                            <div className="text-md md:text-lg font-medium text-black">
+                                                &#8377;{totalPrice}
+                                            </div>
+                                        </div>
+                                        <div className="text-sm md:text-md py-5 border-t mt-5">
+                                            The subtotal reflects the total price of
+                                            your order, including duties and taxes,
+                                            before any applicable discounts. It does
+                                            not include delivery costs and
+                                            international transaction fees.
+                                        </div>
                                     </div>
+
+                                    <div className="p-4">
+                                        <p className="text-sm md:text-md py-5 border-t ">If you have a coupon code, please enter it in the box below</p>
+                                        <div className="justify-start md:flex">
+                                            <form action="" method="POST">
+                                                <div className="flex items-center w-full h-13 pl-3  bg-gray-100 border rounded-full">
+
+                                                    <input ref={inputRef} type="coupon" name="code" id="coupon" placeholder="Apply coupon"
+                                                        className="w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none" />
+
+                                                    <button onClick={handleValidCoupon} type="button" className="text-sm flex items-center px-3 py-3  text-white bg-black rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none">
+                                                        <RiCoupon4Line />
+                                                        <span className="font-medium ml-2">Apply</span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    {/* BUTTON START */}
+                                    <button
+                                        className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
+                                        onClick={handlePayment}
+                                    >
+                                        Checkout
+                                        {loading && <img src="/spinner.svg" />}
+                                    </button>
+                                    {/* BUTTON END */}
+
                                 </div>
-
-                                {/* BUTTON START */}
-                                <button
-                                    className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
-                                    onClick={handlePayment}
-                                >
-                                    Checkout
-                                    {loading && <img src="/spinner.svg" />}
-                                </button>
-                                {/* BUTTON END */}
-
+                                {/* SUMMARY END */}
                             </div>
-                            {/* SUMMARY END */}
+                            {/* CART CONTENT END */}
+                        </>
+                    )}
+
+                    {/* This is empty screen */}
+                    {cart.length < 1 && (
+                        <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
+                            <img
+                                src="https://www.selectgp.com/content/images/empty-cart.png"
+                                width={300}
+                                height={300}
+                                className="w-[300px] md:w-[400px]"
+                            />
+                            <span className="text-xl font-bold">
+                                Your cart is empty
+                            </span>
+                            <span className="text-center mt-4">
+                                Looks like you have not added anything in your cart.
+                                <br />
+                                Go ahead and explore top categories.
+                            </span>
+                            <div className="py-4 px-8 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8">
+                                <Link
+                                    href="/"
+
+                                >
+
+                                    Continue Shopping
+                                </Link>
+                            </div>
                         </div>
-                        {/* CART CONTENT END */}
-                    </>
-                )}
-
-                {/* This is empty screen */}
-                {cart.length < 1 && (
-                    <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
-                        <img
-                            src="https://www.selectgp.com/content/images/empty-cart.png"
-                            width={300}
-                            height={300}
-                            className="w-[300px] md:w-[400px]"
-                        />
-                        <span className="text-xl font-bold">
-                            Your cart is empty
-                        </span>
-                        <span className="text-center mt-4">
-                            Looks like you have not added anything in your cart.
-                            <br />
-                            Go ahead and explore top categories.
-                        </span>
-                        <div className="py-4 px-8 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 mt-8">
-                            <Link
-                                href="/"
-
-                            >
-
-                                Continue Shopping
-                            </Link>
-                        </div>
-                    </div>
-                )}
-            </Wrapper>
+                    )}
+                </Wrapper>
+            </div>
         </div>
     );
 };

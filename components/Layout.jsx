@@ -10,16 +10,16 @@ import { Provider } from "react-redux";
 import store from "../store/store";
 import Cart from "../pages/cart";
 
-const Layout = ({ children }) => {
-  const [infoData, setInfoData] = useState();
+const Layout = ({ children, infoData, productData }) => {
+  // const [infoData, setInfoData] = useState();
 
-  useEffect(() => {
-    const infoQuery = '*[_type =="info"]';
+  // useEffect(() => {
+  //   const infoQuery = '*[_type =="info"]';
 
-    client.fetch(infoQuery).then((data) => {
-      setInfoData(data);
-    });
-  }, []);
+  //   client.fetch(infoQuery).then((data) => {
+  //     setInfoData(data);
+  //   });
+  // }, []);
   return (
     <div className="layout">
       <Head>
@@ -37,10 +37,6 @@ const Layout = ({ children }) => {
         />
       </Head>
       <Provider store={store}>
-        <header>
-          <Header infoData={infoData} />
-        </header>
-
         <main className="main-container">{children}</main>
         <footer>
           <Footer />
@@ -53,6 +49,8 @@ const Layout = ({ children }) => {
 export const getServerSideProps = async () => {
   const infoQuery = '*[_type =="info"]';
   const infoData = await client.fetch(infoQuery);
+
+  const productData = await client.fetch('*[_type == "product"]');
 
   return {
     props: { infoData },

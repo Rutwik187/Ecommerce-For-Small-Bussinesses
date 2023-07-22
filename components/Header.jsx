@@ -11,8 +11,9 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 
 import { useSelector } from "react-redux";
+import SearchBar from "./SearchBar";
 
-const Header = () => {
+const Header = ({ product }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [show, setShow] = useState("translate-y-0");
@@ -42,7 +43,7 @@ const Header = () => {
   }, [lastScrollY]);
 
   // useEffect(() => {
-  //     fetchCategories();
+  //   fetchCategories();
   // }, []);
 
   // const fetchCategories = async () => {
@@ -76,12 +77,7 @@ const Header = () => {
 
         <div className="flex items-center gap-2 text-black">
           {/* Icon start */}
-          <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
-            {/* <IoMdHeartEmpty className="text-[19px] md:text-[24px]" /> */}
-            {/* <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-              51
-            </div> */}
-          </div>
+          <SearchBar product={product} />
           {/* Icon end */}
 
           {/* Icon start */}
@@ -120,3 +116,15 @@ const Header = () => {
 };
 
 export default Header;
+
+// export const getStaticProps = async () => {
+//   const productsQuery = '*[_type == "coupon"]';
+
+//   const productData = await client.fetch(productsQuery);
+
+//   return {
+//     props: {
+//       productData,
+//     },
+//   };
+// };

@@ -3,10 +3,12 @@ import React from 'react';
 import { client } from '../lib/client';
 import { Product, HeroBanner, Category } from '../components';
 import MiniBanners from '../components/MiniBanners';
+import Header from '../components/Header';
 
 
-const Home = ({ miniBannerData, featureProductsData, bannerData, categories }) => (
+const Home = ({ miniBannerData, featureProductsData, bannerData, categories, productData }) => (
   <div>
+    <Header product={productData} />
 
     <HeroBanner heroBanner={bannerData} />
     <MiniBanners miniBanner={miniBannerData} />
@@ -55,10 +57,12 @@ export const getServerSideProps = async () => {
   const miniBannerQuery = '*[_type == "miniBanner"]';
   const miniBannerData = await client.fetch(miniBannerQuery);
 
+  const productData = await client.fetch(`*[_type == 'product']`)
+
 
 
   return {
-    props: { miniBannerData, featureProductsData, categories, bannerData }
+    props: { miniBannerData, featureProductsData, categories, bannerData, productData }
   }
 }
 
