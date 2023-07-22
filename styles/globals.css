@@ -149,6 +149,12 @@
   position: relative;
   margin: 1rem;
 }
+.embla__brands-slide {
+  flex: 0 0 20%;
+  min-width: 0;
+  position: relative;
+  margin: 1rem;
+}
 
 @media screen and (max-width: 800px) {
   .embla__mini-slide {
@@ -156,6 +162,9 @@
   }
   .embla__product-slide {
     flex: 0 0 80%;
+  }
+  .embla__brands-slide {
+    flex: 0 0 40%;
   }
 }
 .embla__slide img {

@@ -4,9 +4,10 @@ import { client } from '../lib/client';
 import { Product, HeroBanner, Category } from '../components';
 import MiniBanners from '../components/MiniBanners';
 import Header from '../components/Header';
+import Brands from '../components/Brands';
 
 
-const Home = ({ miniBannerData, featureProductsData, bannerData, categories, productData }) => (
+const Home = ({ miniBannerData, featureProductsData, bannerData, categories, productData, brandData }) => (
   <div>
     <Header product={productData} />
 
@@ -38,6 +39,17 @@ const Home = ({ miniBannerData, featureProductsData, bannerData, categories, pro
         {featureProductsData?.map((product) => <Product key={product._id} product={product} />)}
       </div>
     </div>
+
+    {/* Brand Data */}
+    <div className='w-full  px-5 md:px-10 mx-auto'>
+      <div className="text-center max-w-[800px] mx-auto mb-[10px] mt-[30px] md:mb-[30px] md:mt-[60px]">
+        <h2 className='text-[28px] md:text-[34px]  font-semibold leading-tight'>Brands We Work With</h2>
+
+      </div>
+
+      <Brands brands={brandData} />
+    </div>
+
   </div>
 );
 
@@ -58,11 +70,12 @@ export const getServerSideProps = async () => {
   const miniBannerData = await client.fetch(miniBannerQuery);
 
   const productData = await client.fetch(`*[_type == 'product']`)
+  const brandData = await client.fetch(`*[_type=='brand']`)
 
 
 
   return {
-    props: { miniBannerData, featureProductsData, categories, bannerData, productData }
+    props: { miniBannerData, featureProductsData, categories, bannerData, productData, brandData }
   }
 }
 
