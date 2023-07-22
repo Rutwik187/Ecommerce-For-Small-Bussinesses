@@ -25,6 +25,7 @@ const Product = ({ product }) => {
       theme: "light",
     });
   };
+  const count = 1;
   const dispatch = useDispatch();
   return (
     <div
@@ -37,7 +38,7 @@ const Product = ({ product }) => {
     >
       <button
         onClick={() => {
-          dispatch(addToCart({ item: { ...product } }));
+          dispatch(addToCart({ item: { ...product, count } }));
           notify();
         }}
         class="absolute end-4 top-4 rounded-full bg-gray-100 text-gray-900 transition hover:text-gray-900/75 z-50 w-16 h-16 flex items-center justify-center duration-200 hover:scale-105 "
