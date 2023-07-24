@@ -41,14 +41,14 @@ const Product = ({ product }) => {
           dispatch(addToCart({ item: { ...product, count } }));
           notify();
         }}
-        class="absolute end-4 top-4 rounded-full bg-gray-100 text-gray-900 transition hover:text-gray-900/75 z-50 w-16 h-16 flex items-center justify-center duration-200 hover:scale-105 "
+        className="absolute end-4 top-4 rounded-full bg-gray-100 text-gray-900 transition hover:text-gray-900/75 z-50 w-16 h-16 flex items-center justify-center duration-200 hover:scale-105 "
         style={{
           border: "0.5px solid rgb(232, 232, 232)",
           boxShadow: "rgba(0, 0, 0, 0.04) 2px 2px 8px",
         }}
         title="Add to cart"
       >
-        <span class="sr-only">Add to the Cart</span>
+        <span className="sr-only">Add to the Cart</span>
 
         <img
           width={30}

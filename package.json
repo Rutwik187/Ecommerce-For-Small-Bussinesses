@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.15",
+    "@mui/material": "^5.14.1",
     "@portabletext/react": "^3.0.4",
     "@reduxjs/toolkit": "^1.9.5",
     "@sanity/client": "^3.2.0",
