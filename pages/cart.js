@@ -30,13 +30,14 @@ const Cart = ({ coupons, productData }) => {
     const [percentDiscount, setPercentDiscount] = useState(0)
     const [loading, setLoading] = useState(false);
     const inputRef = useRef(null)
+    const [coupon, setCoupon] = useState('')
 
 
     const cart = useSelector((state) => state.cart.cart);
 
 
     const successToast = () => {
-        toast.success(`Congratulation got ${percentDiscount}% Off`, {
+        toast.success(`Congratulation coupon applied `, {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -52,6 +53,7 @@ const Cart = ({ coupons, productData }) => {
         for (const couponObj of coupons) {
             if (couponObj.coupon === enteredCoupon) {
                 setCouponValid(true)
+                setCoupon(couponObj.coupon)
                 setPercentDiscount(couponObj.percentageDiscount)
                 successToast()
                 break
@@ -140,11 +142,11 @@ const Cart = ({ coupons, productData }) => {
                                         </div>
                                     </div>
 
-                                    {/* BUTTON START */}
 
 
-                                    <CheckoutModal />
-                                    {/* BUTTON END */}
+                                    {/* Checkout form */}
+                                    <CheckoutModal coupon={coupon} subTotal={totalPrice} />
+
 
                                 </div>
                                 {/* SUMMARY END */}

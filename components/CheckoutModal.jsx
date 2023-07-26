@@ -1,9 +1,10 @@
-import * as React from "react";
+import React, { useRef } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -11,21 +12,47 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  // bgcolor: "background.paper",
-  // border: "2px solid #000",
-  // boxShadow: 24,
-  // p: 4,
   borderRadius: "16px",
 };
 
-export default function CheckoutModal() {
+export default function CheckoutModal({ coupon, subTotal }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const cart = useSelector((state) => state.cart.cart);
+  const name = useRef();
+  const phoneNo = useRef();
+  const address = useRef();
+
+  // const mobileNumber = 9370947507; // Replace this with the target mobile number
+
+  const handleSendWhatsApp = () => {
+    const mobileNumber = 9370947507;
+    const message = encodeURIComponent(
+      "📦 New order 📦\n\n" +
+        cart
+          .map(
+            (product) =>
+              `${product.name}: ${product.count} X ₹${
+                product.discountedPrice
+              } = ₹${product.count * product.discountedPrice}`
+          )
+          .join("\n") +
+        `\n\n Coupon Code: ${coupon} \n\n Subtotal: ${subTotal}\n` +
+        `\n 🏡 Address: ${address.current.value}\n ☎️  Phone No.: ${phoneNo.current.value} \n 🙎 Name: ${name.current.value}`
+    );
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${mobileNumber}&text=${message}`;
+
+    window.open(
+      whatsappURL,
+      "_blank" // <- This is what makes it open in a new window.
+    );
+    window.location.href = "/success";
+  };
 
   return (
     <div>
+      {/* {console.log(whatsappURL)} */}
       <button
         onClick={handleOpen}
         className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
@@ -40,65 +67,75 @@ export default function CheckoutModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div class="bg-gray-100 rounded-xl px-8">
-            <div class="container mx-auto py-8">
-              <h1 class="text-2xl font-bold mb-6 text-center">Checkout Form</h1>
-              <form class="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
-                <div class="mb-4">
+          <div className="bg-gray-100 rounded-xl px-8">
+            <div className="container mx-auto py-8">
+              <h1 className="text-2xl font-bold mb-6 text-center">
+                Checkout Form
+              </h1>
+              <form className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
+                <div className="mb-4">
                   <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-700 text-sm font-bold mb-2"
                     for="name"
                   >
                     Name
                   </label>
                   <input
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
                     type="text"
                     id="name"
                     name="name"
                     placeholder="Rajesh Verma"
+                    ref={name}
+                    required
                   />
                 </div>
-                <div class="mb-4">
+                <div className="mb-4">
                   <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-700 text-sm font-bold mb-2"
                     for="phoneNumber"
                   >
                     Phone Number
                   </label>
                   <input
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
                     type="number"
                     id="phoneNumber"
                     name="phoneNumber"
                     placeholder="9896857412"
+                    ref={phoneNo}
+                    required
                   />
                 </div>
-                <div class="mb-4">
+                <div className="mb-4">
                   <label
-                    class="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-700 text-sm font-bold mb-2"
                     for="password"
                   >
                     Address
                   </label>
                   <textarea
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
                     id="address"
                     name="address"
                     placeholder="address"
+                    ref={address}
+                    required
                   />
                 </div>
-                <div class="mb-4">
+                <div className="mb-4">
                   <i
-                    class="block text-gray-700 text-sm font-bold mb-2"
+                    className="block text-gray-700 text-sm font-bold mb-2"
                     for="confirm-password"
                   >
                     Also share whatsApp location for convenience if possible
                   </i>
                 </div>
+
                 <button
-                  class="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
-                  type="submit"
+                  onClick={handleSendWhatsApp}
+                  className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
+                  type="button"
                 >
                   Place order on WhatsApp
                 </button>

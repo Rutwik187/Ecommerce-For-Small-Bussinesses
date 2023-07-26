@@ -4,8 +4,10 @@ import { BsBagCheckFill } from 'react-icons/bs';
 
 import { useStateContext } from '../context/StateContext';
 import { runFireworks } from '../lib/utils';
+import Header from '../components/Header';
 
-const Success = () => {
+const Success = ({ productData
+}) => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
 
   useEffect(() => {
@@ -17,26 +19,30 @@ const Success = () => {
   }, []);
 
   return (
-    <div className="success-wrapper">
-      <div className="success">
-        <p className="icon">
-          <BsBagCheckFill />
-        </p>
-        <h2>Thank you for your order!</h2>
-        <p className="email-msg">Check your email inbox for the receipt.</p>
-        <p className="description">
-          If you have any questions, please email
-          <a className="email" href="mailto:order@example.com">
-            order@example.com
-          </a>
-        </p>
-        <Link href="/">
-          <button type="button" width="300px" className="btn">
-            Continue Shopping
-          </button>
-        </Link>
+    <>
+      <Header productData={productData} />
+      <div className="success-wrapper mb-12">
+        <div className="success">
+          <p className="icon">
+            <BsBagCheckFill />
+          </p>
+          <br />
+          <h2>Thank you for your order!</h2>
+          <p className="email-msg">Check your whats app for further Updates</p>
+          <p className="description">
+            If you have any questions, please email
+            <a className="email" href="mailto:order@example.com">
+              order@example.com
+            </a>
+          </p>
+          <Link href="/">
+            <button type="button" width="300px" className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center">
+              Continue Shopping
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

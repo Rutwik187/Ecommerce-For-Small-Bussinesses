@@ -93,21 +93,4 @@ export const RichTextComponent = {
       </blockquote>
     ),
   },
-  // marks: {
-  //   link: ({ children, value }) => {
-  //     const rel = !value.href.startsWith("/")
-  //       ? "noreferrer noopener"
-  //       : undefined;
-
-  //     return (
-  //       <Link
-  //         href={value.href}
-  //         rel={rel}
-  //         className="underline decoration-emphasize hover:decoration-black"
-  //       >
-  //         {children}
-  //       </Link>
-  //     );
-  //   },
-  // },
 };
