@@ -21,31 +21,6 @@ const CartItem = ({ data }) => {
 
   const dispatch = useDispatch();
 
-  // const updateCartItem = (e, key) => {
-  //   let payload = {
-  //     key,
-  //     val:
-  //       key === "quantityNum" ? parseInt(quantityNumUpdate) : quantityNumUpdate,
-  //     id: _id,
-  //   };
-  //   dispatch(updateCart(payload));
-  // };
-
-  // const [quantityNumUpdate, setQuantityNumUpdate] = useState(quantityNum);
-
-  // const increment = () => {
-  //   quantityNum < 100
-  //     ? setQuantityNumUpdate((prevCount) => prevCount + 1)
-  //     : "Contact dealer for more quantity";
-  //   updateCartItem(quantityNumUpdate, "quantityNum");
-  // };
-  // const decrement = () => {
-  //   quantityNumUpdate > 0
-  //     ? setQuantityNumUpdate((prevCount) => prevCount - 1)
-  //     : 0;
-  //   updateCartItem(quantityNumUpdate, "quantityNum");
-  // };
-
   return (
     <div className="flex py-5 gap-3 md:gap-5 border-b">
       {/* IMAGE START */}

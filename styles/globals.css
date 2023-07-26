@@ -188,7 +188,7 @@
 .embla__dots {
   z-index: 1;
   bottom: 0rem;
-  position: absolute;
+  /* position: absolute; */
   left: 0;
   right: 0;
   display: flex;

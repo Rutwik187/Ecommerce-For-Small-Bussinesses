@@ -36,35 +36,24 @@ const Product = ({ product }) => {
         borderRadius: "8px",
       }}
     >
-      <button
-        onClick={() => {
-          dispatch(addToCart({ item: { ...product, count } }));
-          notify();
-        }}
-        className="absolute end-4 top-4 rounded-full bg-gray-100 text-gray-900 transition hover:text-gray-900/75 z-50 w-16 h-16 flex items-center justify-center duration-200 hover:scale-105 "
-        style={{
-          border: "0.5px solid rgb(232, 232, 232)",
-          boxShadow: "rgba(0, 0, 0, 0.04) 2px 2px 8px",
-        }}
-        title="Add to cart"
-      >
-        <span className="sr-only">Add to the Cart</span>
-
-        <img
-          width={30}
-          src="https://www.svgrepo.com/show/215123/shopping-cart-add.svg"
-          alt=""
-        />
-      </button>
+      <div className="absolute end-0 top-0 rounded-lg bg-green-500 text-gray-100 transition  z-50 flex items-center justify-center duration-200 hover:scale-105 p-2">
+        <p className=" text-xs font-base">
+          {Math.round(
+            ((product.listPrice - product.discountedPrice) /
+              product.listPrice) *
+              100
+          ) + " % OFF"}
+        </p>
+      </div>
       <Link href={`/product/${product.slug.current}`}>
-        <div>
+        <div className="flex flex-col justify-between h-full">
           <img
             width={500}
             height={500}
             src={urlFor(product.image[0]).url()}
             alt={product.name}
           />
-          <div className="p-4 text-black/[0.9]">
+          <div className="p-4 text-black/[0.9] flex flex-col gap-2">
             <h2 className="text-lg font-medium">{product.name}</h2>
             <div className="flex items-center text-black/[0.5]">
               <p className="mr-2 text-lg font-semibold">
@@ -74,13 +63,31 @@ const Product = ({ product }) => {
               <p className="text-base  font-medium line-through">
                 &#8377;{product.listPrice}
               </p>
-              <p className="ml-auto text-base font-medium text-green-500">
-                {Math.round(
-                  ((product.listPrice - product.discountedPrice) /
-                    product.listPrice) *
-                    100
-                ) + " % OFF"}
-              </p>
+
+              <button
+                onClick={() => {
+                  dispatch(addToCart({ item: { ...product, count } }));
+                  notify();
+                }}
+                className=" ml-auto  py-2 px-3 rounded-lg bg-green-500 text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
+                type="submit"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="mr-2 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
+                </svg>
+                ADD
+              </button>
             </div>
           </div>
         </div>

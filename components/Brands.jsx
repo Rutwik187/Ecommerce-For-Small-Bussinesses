@@ -8,7 +8,7 @@ import "react-multi-carousel/lib/styles.css";
 
 const Brands = ({ brands }) => {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 8000, stopOnMouseEnter: true }),
+    Autoplay({ delay: 500, stopOnMouseEnter: false }),
     WheelGesturesPlugin(),
   ]);
 

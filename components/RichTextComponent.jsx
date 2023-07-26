@@ -1,6 +1,7 @@
 // import { Link } from "react-router-dom";
 import { urlFor } from "../lib/client";
-import { React } from "react";
+import React from "react";
+import Link from "next/link";
 
 export const RichTextComponent = {
   types: {
@@ -17,13 +18,60 @@ export const RichTextComponent = {
       );
     },
   },
+  marks: {
+    // Ex. 1: custom renderer for the em / italics decorator
+    em: ({ children }) => (
+      <em className="text-gray-600 font-semibold">{children}</em>
+    ),
+
+    // Ex. 2: rendering a custom `link` annotation
+    link: ({ value, children }) => {
+      const target = (value?.href || "").startsWith("http")
+        ? "_blank"
+        : undefined;
+      return (
+        <a
+          href={value?.href}
+          target={target}
+          rel={target === "_blank" && "noindex nofollow"}
+        >
+          {children}
+        </a>
+      );
+    },
+  },
+  block: {
+    // Ex. 1: customizing common block types
+    h1: ({ children }) => <h1 className="text-2xl">{children}</h1>,
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-purple-500">{children}</blockquote>
+    ),
+
+    // Ex. 2: rendering custom styles
+    customHeading: ({ children }) => (
+      <h2 className="text-lg text-primary text-purple-700">{children}</h2>
+    ),
+  },
+
   list: {
+    // Ex. 1: customizing common list types
+    bullet: ({ children }) => <ul className="mt-xl">{children}</ul>,
+    number: ({ children }) => <ol className="mt-lg">{children}</ol>,
+
+    // Ex. 2: rendering custom lists
+    checkmarks: ({ children }) => (
+      <ol className="m-auto text-lg">{children}</ol>
+    ),
+  },
+
+  listItem: {
+    // Ex. 1: customizing common list types
     bullet: ({ children }) => (
-      <ul className="ml-10 list-disc space-y-5 py-5">{children}</ul>
+      <li style={{ listStyleType: "disclosure-closed" }}>{children}</li>
     ),
-    number: ({ children }) => (
-      <ol className="mt-lg list-decimal">{children}</ol>
-    ),
+
+    // Ex. 2: rendering custom list items
+    checkmarks: ({ children }) => <li>✅ {children}</li>,
   },
   block: {
     h1: ({ children }) => (
@@ -45,21 +93,21 @@ export const RichTextComponent = {
       </blockquote>
     ),
   },
-  marks: {
-    link: ({ children, value }) => {
-      const rel = !value.href.startsWith("/")
-        ? "noreferrer noopener"
-        : undefined;
+  // marks: {
+  //   link: ({ children, value }) => {
+  //     const rel = !value.href.startsWith("/")
+  //       ? "noreferrer noopener"
+  //       : undefined;
 
-      return (
-        <Link
-          to={value.href}
-          rel={rel}
-          className="underline decoration-emphasize hover:decoration-black"
-        >
-          {children}
-        </Link>
-      );
-    },
-  },
+  //     return (
+  //       <Link
+  //         href={value.href}
+  //         rel={rel}
+  //         className="underline decoration-emphasize hover:decoration-black"
+  //       >
+  //         {children}
+  //       </Link>
+  //     );
+  //   },
+  // },
 };
