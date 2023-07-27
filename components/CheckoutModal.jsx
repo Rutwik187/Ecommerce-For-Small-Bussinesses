@@ -1,10 +1,8 @@
 import React, { useRef } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+
 import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 const style = {
   position: "absolute",
