@@ -10,7 +10,7 @@ const allBlogs = ({ productData, blogs }) => {
             {
                 blogs?.map((post, index) => (
                     <Link href={`/blogs/${post.slug.current}`} key={index} class="flex flex-col justify-center antialiased  text-gray-800 min-h-screen gap-4">
-                        <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full">
+                        <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full my-8">
 
                             <article class="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
                                 <a class="relative block group" href="#0">

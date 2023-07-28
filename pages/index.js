@@ -8,7 +8,7 @@ import Brands from '../components/Brands';
 
 
 const Home = ({ miniBannerData, featureProductsData, bannerData, categories, productData, brandData }) => (
-  <div>
+  <div >
     <Header product={productData} />
 
     <HeroBanner heroBanner={bannerData} />
