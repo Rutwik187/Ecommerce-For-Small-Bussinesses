@@ -13,10 +13,10 @@ const BlogPage = ({ post, productData }) => {
 
     return (
         <>
-            <Header productData={productData} />
+            <Header product={productData} />
 
             <div>
-                <div className="container py-6 md:py-10">
+                <div className="container px-4 mx-auto py-6 md:py-10">
                     <div className="mx-auto max-w-4xl">
                         <div className="">
                             <h1 className="pt-5 font-body text-3xl font-semibold text-gray-900 sm:text-3xl md:text-4xl xl:text-4xl m-auto">

@@ -3,7 +3,7 @@ import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-
 
 import { client, urlFor } from '../../lib/client';
 import { Product, Category } from '../../components';
-import { useStateContext } from '../../context/StateContext';
+
 
 import { RelatedProducts } from '../../components';
 import Header from '../../components/Header';
