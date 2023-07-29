@@ -39,6 +39,19 @@ export default {
             type: "string",
         },
         {
+            name: 'aboutUs',
+            title: 'About Us [Write at-least a paragraph about your shop for About Us page]',
+            type: 'blockContent',
+        },
+        {
+            name: 'shopImg',
+            title: 'Image to display on About us page',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+        },
+        {
             name: 'addressUrl',
             title: 'Google Maps Url',
             type: "url"

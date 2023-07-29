@@ -78,7 +78,7 @@ const Cart = ({ coupons, productData, infoData }) => {
         <div>
             <Header product={productData} info={infoData} />
             <div className="w-full md:py-20">
-                {console.log(cart)}
+
                 <Wrapper>
                     {cart.length > 0 && (
                         <>
@@ -146,7 +146,7 @@ const Cart = ({ coupons, productData, infoData }) => {
 
 
                                     {/* Checkout form */}
-                                    <CheckoutModal coupon={coupon} subTotal={totalPrice} />
+                                    <CheckoutModal info={infoData} coupon={coupon} subTotal={totalPrice} />
 
 
                                 </div>

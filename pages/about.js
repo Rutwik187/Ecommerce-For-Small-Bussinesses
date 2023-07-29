@@ -1,6 +1,10 @@
 import React from 'react'
 import Header from '../components/Header'
 import { Footer } from '../components'
+import { PortableText } from "@portabletext/react";
+import { RichTextComponent } from '../components/RichTextComponent';
+import { urlFor } from '../lib/client';
+import { client } from '../lib/client';
 
 const about = ({ productData, infoData }) => {
     return (
@@ -18,16 +22,18 @@ const about = ({ productData, infoData }) => {
                                     </h1>
                                 </div>
                                 <p className="px-4 mb-10 text-base leading-7 text-gray-500 ">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam Lorem ipsum dolor sit
-                                    amet.
+                                    <PortableText
+                                        // Pass in block content straight from Sanity.io
+                                        value={infoData[0].aboutUs}
+                                        components={RichTextComponent}
+                                    />
                                 </p>
 
                             </div>
                         </div>
                         <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
-                            <img src="https://i.postimg.cc/9MW8G96J/pexels-the-coach-space-2977565.jpg" alt=""
-                                className="relative z-40 object-cover w-full h-full rounded" />
+                            <img src={urlFor(infoData[0].shopImg)} alt="About Us"
+                                className="relative  object-cover w-full h-full rounded" />
                         </div>
                     </div>
                 </div>

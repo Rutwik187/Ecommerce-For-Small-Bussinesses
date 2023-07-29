@@ -13,7 +13,7 @@ const style = {
   borderRadius: "16px",
 };
 
-export default function CheckoutModal({ coupon, subTotal }) {
+export default function CheckoutModal({ coupon, subTotal, info }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -22,10 +22,8 @@ export default function CheckoutModal({ coupon, subTotal }) {
   const phoneNo = useRef();
   const address = useRef();
 
-  // const mobileNumber = 9370947507; // Replace this with the target mobile number
-
   const handleSendWhatsApp = () => {
-    const mobileNumber = 9370947507;
+    const mobileNumber = info[0].phoneNo;
     const message = encodeURIComponent(
       "📦 New order 📦\n\n" +
         cart

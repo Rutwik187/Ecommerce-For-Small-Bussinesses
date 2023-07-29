@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Footer } from '../components'
 import { client } from '../lib/client'
 import Header from '../components/Header'
 
 const contact = ({ infoData, productData }) => {
+    const name = useRef();
+    const email = useRef();
+    const message = useRef();
+
+    const handleSendWhatsApp = () => {
+        const mobileNumber = infoData[0].phoneNo;
+        const WhatsAppMessage = encodeURIComponent(
+            "👋 Hi. I just visited the your shop website and want to know more\n\n" +
+
+            `\n🙎 Name: ${name.current.value}\n\n📧 Email: ${email.current.value}\n\n 📫 Message: ${message.current.value} \n`
+        );
+        const whatsappURL = `https://api.whatsapp.com/send?phone=${mobileNumber}&text=${WhatsAppMessage}`;
+
+        window.open(
+            whatsappURL,
+            "_blank" // <- This is what makes it open in a new window.
+        );
+
+    };
+
     return (
         <div >
             <Header info={infoData} product={productData} />
@@ -20,18 +40,19 @@ const contact = ({ infoData, productData }) => {
                                         <form>
                                             <div className="relative mb-6">
                                                 <label className='text-start block'>Full Name</label>
-                                                <input type="text" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 focus:border-gray-500" />
+                                                <input ref={name} type="text" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 focus:border-gray-500" />
                                             </div>
                                             <div className="relative mb-6" data-te-input-wrapper-init>
                                                 <label className='text-start block'>Email address</label>
-                                                <input type="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 focus:border-gray-500" />
+                                                <input ref={email} type="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 focus:border-gray-500" />
                                             </div>
                                             <div className="relative mb-6" data-te-input-wrapper-init>
                                                 <label className='text-start block'>Message</label>
-                                                <textarea type="text" className="p-2 h-28 border mt-1 rounded px-4 w-full bg-gray-50 focus:border-gray-500" />
+                                                <textarea ref={message} type="text" className="p-2 h-28 border mt-1 rounded px-4 w-full bg-gray-50 focus:border-gray-500" />
                                             </div>
 
                                             <button
+                                                onClick={handleSendWhatsApp}
                                                 type="button"
                                                 data-te-ripple-init
                                                 data-te-ripple-color="light"
