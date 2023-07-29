@@ -1,8 +1,12 @@
 import React from 'react'
+import { Footer } from '../components'
+import { client } from '../lib/client'
+import Header from '../components/Header'
 
-const contact = () => {
+const contact = ({ infoData, productData }) => {
     return (
         <div >
+            <Header info={infoData} product={productData} />
             <div className=" container my-24 mx-auto md:px-6">
 
                 <section className="mb-32 text-center">
@@ -87,8 +91,18 @@ const contact = () => {
                     </div>
                 </div>
             </div>
+            <Footer info={infoData} />
         </div>
     )
+}
+export const getServerSideProps = async () => {
+
+    const productData = await client.fetch(`*[_type=="product"]`)
+    const infoData = await client.fetch(`*[_type=="info"]`)
+
+    return {
+        props: { infoData, productData }
+    }
 }
 
 export default contact

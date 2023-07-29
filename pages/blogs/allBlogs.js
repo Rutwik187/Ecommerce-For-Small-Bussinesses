@@ -2,11 +2,12 @@ import React from 'react'
 import Header from '../../components/Header'
 import { client, urlFor } from '../../lib/client'
 import Link from "next/link";
+import { Footer } from '../../components';
 
-const allBlogs = ({ productData, blogs }) => {
+const allBlogs = ({ productData, blogs, infoData }) => {
     return (
         <>
-            <Header product={productData} />
+            <Header product={productData} info={infoData} />
             {
                 blogs?.map((post, index) => (
                     <Link href={`/blogs/${post.slug.current}`} key={index} class="flex flex-col justify-center antialiased  text-gray-800 min-h-screen gap-4">
@@ -39,16 +40,18 @@ const allBlogs = ({ productData, blogs }) => {
                     </Link>
                 ))
             }
-
+            <Footer info={infoData} />
         </>
     )
 }
 
 export const getStaticProps = async () => {
     const blogs = await client.fetch(`*[_type == 'blog']`)
+    const productData = await client.fetch(`*[_type=="product"]`)
+    const infoData = await client.fetch(`*[_type=="info"]`)
 
     return {
-        props: { blogs }
+        props: { blogs, productData, infoData }
     }
 }
 

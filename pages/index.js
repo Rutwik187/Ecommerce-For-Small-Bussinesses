@@ -1,15 +1,16 @@
 import React from 'react';
 
 import { client } from '../lib/client';
-import { Product, HeroBanner, Category } from '../components';
+import { Product, HeroBanner, Category, Footer } from '../components';
 import MiniBanners from '../components/MiniBanners';
 import Header from '../components/Header';
 import Brands from '../components/Brands';
 
 
-const Home = ({ miniBannerData, featureProductsData, bannerData, categories, productData, brandData }) => (
+
+const Home = ({ miniBannerData, featureProductsData, bannerData, categories, productData, brandData, infoData }) => (
   <div >
-    <Header product={productData} />
+    <Header product={productData} info={infoData} />
 
     <HeroBanner heroBanner={bannerData} />
     <MiniBanners miniBanner={miniBannerData} />
@@ -49,7 +50,7 @@ const Home = ({ miniBannerData, featureProductsData, bannerData, categories, pro
 
       <Brands brands={brandData} />
     </div>
-
+    <Footer info={infoData} />
   </div>
 );
 
@@ -72,10 +73,12 @@ export const getServerSideProps = async () => {
   const productData = await client.fetch(`*[_type == 'product']`)
   const brandData = await client.fetch(`*[_type=='brand']`)
 
+  const infoData = await client.fetch(`*[_type=="info"]`)
+
 
 
   return {
-    props: { miniBannerData, featureProductsData, categories, bannerData, productData, brandData }
+    props: { miniBannerData, featureProductsData, categories, bannerData, productData, brandData, infoData }
   }
 }
 

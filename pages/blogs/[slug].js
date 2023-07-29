@@ -5,15 +5,16 @@ import { PortableText } from "@portabletext/react";
 
 import { RichTextComponent } from "../../components/RichTextComponent";
 import Header from "../../components/Header";
+import { Footer } from "../../components";
 
 
 
 
-const BlogPage = ({ post, productData }) => {
+const BlogPage = ({ post, productData, infoData }) => {
 
     return (
         <>
-            <Header product={productData} />
+            <Header product={productData} info={infoData} />
 
             <div>
                 <div className="container px-4 mx-auto py-6 md:py-10">
@@ -43,7 +44,7 @@ const BlogPage = ({ post, productData }) => {
                     </div>
                 </div>
             </div>
-
+            <Footer info={infoData} />
         </>
     );
 };
@@ -69,7 +70,9 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { slug } }) => {
     const post = await client.fetch(`*[_type == "blog" && slug.current == '${slug}'][0]`)
+    const productData = await client.fetch(`*[_type=="product"]`)
+    const infoData = await client.fetch(`*[_type=="info"]`)
     return {
-        props: { post }
+        props: { post, productData, infoData }
     }
 }

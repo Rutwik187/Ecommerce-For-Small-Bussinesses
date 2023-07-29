@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 import { client, urlFor } from '../../lib/client';
-import { Product, Category } from '../../components';
+import { Product, Category, Footer } from '../../components';
 
 
 import { RelatedProducts } from '../../components';
@@ -14,7 +14,7 @@ const Products = ({ categories, products, slug, productData }) => {
 
     return (
         <div>
-            <Header product={productData} />
+            <Header product={productData} info={infoData} />
             <div className='w-full max-w-[1280px] px-5 md:px-10 mx-auto'>
                 <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
                     <h2 className='text-[28px] md:text-[34px]  font-semibold leading-tight'>Products</h2>
@@ -28,7 +28,7 @@ const Products = ({ categories, products, slug, productData }) => {
 
             {/* <RelatedProducts products={categories} /> */}
 
-
+            <Footer info={infoData} />
         </div>
     )
 }
@@ -64,10 +64,13 @@ export const getStaticProps = async ({ params: { slug } }) => {
     const products = await client.fetch(query);
     const categories = await client.fetch(categoriesQuery);
 
+    const productData = await client.fetch(`*[_type=="product"]`)
+    const infoData = await client.fetch(`*[_type=="info"]`)
+
 
 
     return {
-        props: { products, categories, slug }
+        props: { products, categories, slug, infoData, productData }
     }
 }
 

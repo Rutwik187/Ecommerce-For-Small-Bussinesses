@@ -34,11 +34,28 @@ export default {
 
         },
         {
-            name: "insta",
+            name: 'address',
+            title: "Address",
+            type: "string",
+        },
+        {
+            name: 'addressUrl',
+            title: 'Google Maps Url',
+            type: "url"
+        },
+        {
+            name: "instagram",
             title: "Instagram Url",
             type: "url",
 
         },
+        {
+            name: 'facebook',
+            title: "Facebook Url",
+            type: "url",
+        },
+
+
 
     ],
 };

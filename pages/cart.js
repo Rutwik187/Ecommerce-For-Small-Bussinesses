@@ -10,8 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header";
 import BasicModal from "../components/CheckoutModal";
 import CheckoutModal from "../components/CheckoutModal";
+import { Footer } from "../components";
 
-const Cart = ({ coupons, productData }) => {
+const Cart = ({ coupons, productData, infoData }) => {
 
     const failureToast = () => {
         toast.error("Invalid Coupon!!", {
@@ -75,7 +76,7 @@ const Cart = ({ coupons, productData }) => {
 
     return (
         <div>
-            <Header product={productData} />
+            <Header product={productData} info={infoData} />
             <div className="w-full md:py-20">
                 {console.log(cart)}
                 <Wrapper>
@@ -185,18 +186,22 @@ const Cart = ({ coupons, productData }) => {
                     )}
                 </Wrapper>
             </div>
+            <Footer info={infoData} />
         </div>
     );
 };
 
 export default Cart;
 
+
 export const getStaticProps = async () => {
     const coupons = await client.fetch(`*[_type == 'coupon']`)
+    const productData = await client.fetch(`*[_type=="product"]`)
+    const infoData = await client.fetch(`*[_type=="info"]`)
 
     return {
         props: {
-            coupons
+            coupons, infoData, productData
         }
     }
 }

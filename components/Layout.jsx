@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import store from "../store/store";
 import Cart from "../pages/cart";
 
-const Layout = ({ children, infoData, productData }) => {
+const Layout = ({ children, infoData, products }) => {
   // const [infoData, setInfoData] = useState();
 
   // useEffect(() => {
@@ -38,9 +38,6 @@ const Layout = ({ children, infoData, productData }) => {
       </Head>
       <Provider store={store}>
         <main className="main-container">{children}</main>
-        <footer>
-          <Footer />
-        </footer>
       </Provider>
     </div>
   );
@@ -53,7 +50,7 @@ export const getServerSideProps = async () => {
   const productData = await client.fetch('*[_type == "product"]');
 
   return {
-    props: { infoData },
+    props: { infoData, productData },
   };
 };
 

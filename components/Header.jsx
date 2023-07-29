@@ -12,8 +12,9 @@ import { VscChromeClose } from "react-icons/vsc";
 
 import { useSelector } from "react-redux";
 import SearchBar from "./SearchBar";
+import { urlFor } from "../lib/client";
 
-const Header = ({ product }) => {
+const Header = ({ product, info }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [show, setShow] = useState("translate-y-0");
@@ -42,22 +43,13 @@ const Header = ({ product }) => {
     };
   }, [lastScrollY]);
 
-  // useEffect(() => {
-  //   fetchCategories();
-  // }, []);
-
-  // const fetchCategories = async () => {
-  //     const { data } = await fetchDataFromApi("/api/categories?populate=*");
-  //     setCategories(data);
-  // };
-
   return (
     <header
       className={`w-full h-[80px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
     >
       <Wrapper className="h-[60px] flex justify-between items-center">
         <Link href="/">
-          <img src="/logo.svg" className="w-[40px] md:w-[60px]" />
+          <img src={urlFor(info[0].logo)} className="w-[40px] md:w-[60px]" />
         </Link>
 
         <Menu
@@ -116,15 +108,3 @@ const Header = ({ product }) => {
 };
 
 export default Header;
-
-// export const getStaticProps = async () => {
-//   const productsQuery = '*[_type == "coupon"]';
-
-//   const productData = await client.fetch(productsQuery);
-
-//   return {
-//     props: {
-//       productData,
-//     },
-//   };
-// };

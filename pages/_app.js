@@ -1,15 +1,20 @@
 import React from 'react';
 import { ToastContainer } from "react-toastify";
 
+
 import { Layout } from '../components';
 import '../styles/globals.css';
 
 
 
-function MyApp({ Component, pageProps }) {
+
+const MyApp = ({ Component, pageProps, coupons }) => {
+
+
   return (
 
-    <Layout>
+    <Layout >
+
       <ToastContainer />
       <Component {...pageProps} />
     </Layout>
@@ -18,3 +23,4 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+

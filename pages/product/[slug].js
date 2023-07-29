@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { client } from '../../lib/client';
-import { Product, RelatedProducts } from '../../components';
+import { Footer, Product, RelatedProducts } from '../../components';
 
 import { IoMdHeartEmpty } from "react-icons/io";
 import Wrapper from "../../components/Wrapper";
@@ -19,7 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from '../../components/Header';
 
 
-const ProductDetails = ({ product, products, productData }) => {
+const ProductDetails = ({ product, products, infoData }) => {
   const { image, name, description, listPrice, discountedPrice } = product;
   const dispatch = useDispatch();
 
@@ -44,7 +44,7 @@ const ProductDetails = ({ product, products, productData }) => {
 
   return (
     <div>
-      <Header product={productData} />
+      <Header product={products} info={infoData} />
       <div className="w-full md:py-20">
 
         <Wrapper>
@@ -159,7 +159,7 @@ const ProductDetails = ({ product, products, productData }) => {
         </Wrapper>
       </div>
 
-
+      <Footer info={infoData} />
     </div>
   )
 }
@@ -193,7 +193,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
 
-
+  const infoData = await client.fetch(`*[_type=="info"]`)
 
 
 

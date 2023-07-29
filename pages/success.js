@@ -4,8 +4,9 @@ import { BsBagCheckFill } from 'react-icons/bs';
 
 import { runFireworks } from '../lib/utils';
 import Header from '../components/Header';
+import { Footer } from '../components';
 
-const Success = ({ productData
+const Success = ({ productData, infoData
 }) => {
 
 
@@ -16,7 +17,7 @@ const Success = ({ productData
 
   return (
     <>
-      <Header product={productData} />
+      <Header product={productData} info={infoData} />
       <div className="success-wrapper mb-12">
         <div className="success">
           <p className="icon">
@@ -38,8 +39,18 @@ const Success = ({ productData
           </Link>
         </div>
       </div>
+      <Footer info={infoData} />
     </>
   )
+}
+export const getServerSideProps = async () => {
+
+  const productData = await client.fetch(`*[_type=="product"]`)
+  const infoData = await client.fetch(`*[_type=="info"]`)
+
+  return {
+    props: { infoData, productData }
+  }
 }
 
 export default Success
