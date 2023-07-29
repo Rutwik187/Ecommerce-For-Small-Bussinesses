@@ -67,7 +67,11 @@ export default {
             title: "Facebook Url",
             type: "url",
         },
-
+        {
+            name: 'embedMap',
+            title: 'Embed Map in contact us [copy from only https.;. before width...',
+            type: 'url'
+        }
 
 
     ],

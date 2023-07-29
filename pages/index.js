@@ -5,6 +5,8 @@ import { Product, HeroBanner, Category, Footer } from '../components';
 import MiniBanners from '../components/MiniBanners';
 import Header from '../components/Header';
 import Brands from '../components/Brands';
+import { RiWhatsappFill } from "react-icons/ri";
+import { IconContext } from "react-icons";
 
 
 
@@ -51,6 +53,15 @@ const Home = ({ miniBannerData, featureProductsData, bannerData, categories, pro
       <Brands brands={brandData} />
     </div>
     <Footer info={infoData} />
+    <a target='_blank' href={`https://wa.me/${infoData[0].phoneNo}?`}>
+
+      <IconContext.Provider value={{ color: "green" }}>
+
+        <RiWhatsappFill alt="whataspp" className="whatsAppButton" />
+
+
+      </IconContext.Provider>;
+    </a>
   </div>
 );
 

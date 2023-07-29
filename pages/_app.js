@@ -8,7 +8,7 @@ import '../styles/globals.css';
 
 
 
-const MyApp = ({ Component, pageProps, coupons }) => {
+const MyApp = ({ Component, pageProps }) => {
 
 
   return (

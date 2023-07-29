@@ -204,14 +204,14 @@
   margin-left: 0.75rem;
 }
 .embla__dot:after {
-  background: #fd5c638a;
+  background: rgb(119, 213, 119);
   border-radius: 0.2rem;
   width: 100%;
   height: 0.3rem;
   content: "";
 }
 .embla__dot--selected:after {
-  background: #aa0000;
+  background: rgb(7, 109, 7);
 }
 
 .success-wrapper,
@@ -415,4 +415,16 @@
   to {
     transform: translateX(-50%);
   }
+}
+.whatsAppButton {
+  position: fixed;
+  width: 3rem;
+  height: 3rem;
+  right: inherit;
+  right: 2%;
+  bottom: 2%;
+  font-size: 3rem;
+  z-index: 100;
+  cursor: pointer;
+  color: var(--secondary-color);
 }

@@ -20,7 +20,11 @@ const Footer = ({ info }) => {
               title="Company"
               className="inline-flex items-center w-10 h-10"
             >
-              <img src={urlFor(info[0].logo)} alt="logo" />
+              <img
+                src={urlFor(info[0].logo)}
+                alt="logo"
+                className="w-24 md:w-40"
+              />
             </Link>
             {/* <div className="mt-6 lg:max-w-sm">
             <p className="text-sm text-gray-800">
