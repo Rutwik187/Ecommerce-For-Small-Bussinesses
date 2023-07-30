@@ -5,6 +5,7 @@ import { BsBagCheckFill } from 'react-icons/bs';
 import { runFireworks } from '../lib/utils';
 import Header from '../components/Header';
 import { Footer } from '../components';
+import { client } from '../lib/client';
 
 const Success = ({ productData, infoData
 }) => {
@@ -27,9 +28,14 @@ const Success = ({ productData, infoData
           <h2>Thank you for your order!</h2>
           <p className="email-msg">Check your whats app for further Updates</p>
           <p className="description">
-            If you have any questions, please email
-            <a className="email" href="mailto:order@example.com">
-              order@example.com
+            If you have any questions, please contact us on
+            <br />
+            <a className="email" href={`mailto:${infoData.phoneNo}`}>
+              Phone No.: {infoData[0].phoneNo}
+            </a>
+            <br />
+            <a className="email" href={`mailto:${infoData.email}`}>
+              Email: {infoData[0].email}
             </a>
           </p>
           <Link href="/">
