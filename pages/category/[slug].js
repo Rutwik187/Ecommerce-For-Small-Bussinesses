@@ -8,7 +8,7 @@ import { Product, Category, Footer } from '../../components';
 import { RelatedProducts } from '../../components';
 import Header from '../../components/Header';
 
-const Products = ({ categories, products, slug, productData }) => {
+const Products = ({ categories, products, slug, infoData, productData }) => {
     // const { image, name, sellingPrice } = products;
 
 
