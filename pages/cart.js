@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import BasicModal from "../components/CheckoutModal";
 import CheckoutModal from "../components/CheckoutModal";
 import { Footer } from "../components";
+import { runFireworks } from '../lib/utils';
 
 const Cart = ({ coupons, productData, infoData }) => {
 
@@ -38,6 +39,7 @@ const Cart = ({ coupons, productData, infoData }) => {
 
 
     const successToast = () => {
+
         toast.success(`Congratulation coupon applied `, {
             position: "bottom-right",
             autoClose: 5000,
@@ -52,10 +54,11 @@ const Cart = ({ coupons, productData, infoData }) => {
     const handleValidCoupon = () => {
         const enteredCoupon = inputRef.current.value
         for (const couponObj of coupons) {
-            if (couponObj.coupon === enteredCoupon) {
+            if (couponObj.coupon.toLowerCase() === enteredCoupon.toLowerCase()) {
                 setCouponValid(true)
                 setCoupon(couponObj.coupon)
                 setPercentDiscount(couponObj.percentageDiscount)
+                runFireworks();
                 successToast()
                 break
             }
