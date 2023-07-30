@@ -42,8 +42,14 @@ const HeroBanner = ({ heroBanner }) => {
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {heroBanner?.map((item, index) => (
-              <div className="embla__slide" key={index}>
-                <img src={urlFor(item.image).url()} alt="" />
+              <div key={index} className="embla__slide">
+                <a target="_blank" href={item.linkTo}>
+                  <img
+                    className="rounded-xl"
+                    src={urlFor(item.image).url()}
+                    alt=""
+                  />
+                </a>
               </div>
             ))}
           </div>

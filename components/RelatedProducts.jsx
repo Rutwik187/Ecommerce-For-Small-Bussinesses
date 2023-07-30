@@ -9,7 +9,7 @@ import Category from "./Category";
 
 const RelatedProducts = ({ products }) => {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 1000, stopOnMouseEnter: true }),
+    Autoplay({ delay: 500, stopOnMouseEnter: false }),
     WheelGesturesPlugin(),
   ]);
 
@@ -28,13 +28,10 @@ const RelatedProducts = ({ products }) => {
     </div>
   );
 };
-export const getStaticProps = async ({ params: { slug } }) => {
-  
+// export const getStaticProps = async ({ params: { slug } }) => {
 
-
-
-  return {
-      props: { products, categories, slug }
-  }
-}
+//   return {
+//       props: { products, categories, slug }
+//   }
+// }
 export default RelatedProducts;

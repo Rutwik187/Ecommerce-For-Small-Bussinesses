@@ -17,6 +17,12 @@ export default {
         },
         validation: Rule => Rule.required(),
     },
+    {
+        name: 'linkTo',
+        title: 'Link to Url',
+        type: 'url'
+    }
+
 
 
 

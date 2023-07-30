@@ -16,8 +16,14 @@ const MiniBanners = ({ miniBanner }) => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {miniBanner?.map((item, index) => (
-            <div className="embla__mini-slide" key={index}>
-              <img src={urlFor(item.image).url()} alt="" />
+            <div key={index} className="embla__mini-slide">
+              <a target="_blank" href={item.linkTo}>
+                <img
+                  className="rounded-xl"
+                  src={urlFor(item.image).url()}
+                  alt=""
+                />
+              </a>
             </div>
           ))}
         </div>
