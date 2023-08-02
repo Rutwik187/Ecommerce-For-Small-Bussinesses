@@ -4,7 +4,7 @@
 3. Open it in any code editor
 4. Run command ```npm i --force``` in sanity-ecom
 5. move to sanity folder using cd sanity_backend and then run command ```npm i --force```
-6. run command ```sanity login``` and login using gmail account
+6. run command ```sanity login``` and log in using Gmail account
 7. Login to [sanity](www.sanity.io/manage) and click on create new project Login to ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/4b95dd61-2a31-439b-b0d9-526be30e49a5)
 
 8. Press continue and close the window when it asks to copy the link.
@@ -26,8 +26,8 @@
 
 21. Now visit [Vercel](https://vercel.com/login?next=%2Fdashboard) and log in with the GitHub account where we pushed our code.
 22. Vercel dashboard will open click on add ```new > project ``` ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/86fd2cba-8a87-4632-af15-85931af7dbdd)
-23. Find your GitHub repo and click on import  ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/49c6dc54-355a-4c1b-b784-4d486b058239)
-24. Then finally click on ```Deoloy``` to host our frontend. The URL will be generated once deployment is done.
+23. Find your GitHub repo and click on import
+24. Then finally click on ```Deoloy``` to host our front end. The URL will be generated once the deployment is done.
 
     ## Hurrey Your site is finally deployed Now the changes on the sanity dashboard will be reflected on frontend ##
 
