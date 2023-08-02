@@ -1,25 +1,34 @@
-<!--
-Modern Full Stack ECommerce Application with Stripe & Sanity
-![eCommerce](https://user-images.githubusercontent.com/70088342/160780701-7bb38a57-76bd-49a2-a4ec-49f89c50a7c7.png)
+## How to create your own store
+1. Create a Gmail account
+2. Clone the repo and delete ***.github*** folder.
+3. Open it in any code editor
+4. Run command ```npm i --force``` in sanity-ecom
+5. move to sanity folder using cd sanity_backend and then run command ```npm i --force```
+6. run command ```sanity login``` and login using gmail account
+7. Login to [sanity](www.sanity.io/manage) and click on create new project Login to ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/4b95dd61-2a31-439b-b0d9-526be30e49a5)
 
-## Launch your development career with project-based coaching - https://www.jsmastery.pro
+8. Press continue and close the window when it asks to copy the link.
+9. Again visit to  [sanity](www.sanity.io/manage) and click on the project that is created ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/ba01391d-39fc-4719-bdb2-5a69bf2d8158)
 
-**Build and Deploy a fully responsive Modern Full Stack Ecommerce application with Payments functionality**. With Modern design, animations, the ability to add and edit products on the go using a CMS, all advanced cart functionalities, and most importantly the complete integration with Stripe so that you can cover REAL payments. This is the best e-commerce website project that you can currently find on YouTube!
+10. Copy the project id from the dashboard
+11. ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/e5c65f04-1921-483d-93d5-cda554d10024)
 
-In this video, you'll learn:
-- Advanced React Best Practices such as
-    - Folder and file structure, hooks and refs
-- Advanced State Management of the entire application using React Context API
-- Next.js Best Practices such as
-    - File-based routing, Data fetching that allows server-side rendering and static generation which makes your websites incredibly optimized (show getServerSideProps, getStaticPaths, getStaticProps), and you’ll also learn how to use Next.js as a backend endpoint.
-- You’ll learn how to integrate Stripe to manage payments, products, shipping rates, and the entire checkout process
-- And most importantly you’ll learn how to manage the entire content of your app using Sanity. Sanity is the unified content platform that’ll make the making of our entire app possible. <show sanity desk>
-- Through Sanity, you or your clients will be able to change the store’s homepage and more importantly, the details of all the products in the store, instantly and on the go!
-- Sanity allows us to focus on developing the application without having to worry about the content, file storage, and databases. They’ll cover the dirty work for us and allow us to build scalable and modern e-commerce web applications extremely easily.
+12. Replace the current project id with the new project id from files client.js, sanity.cli.ts, sanity.confit.ts. You can search the file using *ctrl + p*.
+13. Save the changes in all three files and run the command ```sanity deploy```  enter the shop name and press enter.
+14. New URL will be generated with the shop name as its domain. [ It usually takes 4-5 mins]
+15. 🥳Congrglations we are done with setting up the backend now. You can visit the URL and add products and other information.
 
-![image](https://user-images.githubusercontent.com/70088342/160780701-7bb38a57-76bd-49a2-a4ec-49f89c50a7c7.png)
-![image](https://user-images.githubusercontent.com/70088342/160780206-9cfe7c0a-3d8e-4a20-a055-b12efebe6c30.png)
-![image](https://user-images.githubusercontent.com/70088342/160780265-692d37ac-7209-4d53-957a-e94b37d123c0.png)
-![image](https://user-images.githubusercontent.com/70088342/160780381-7c947640-422e-4729-abae-21911e9bc716.png)
-![image](https://user-images.githubusercontent.com/70088342/160780549-111ed048-cd4b-4740-b2fd-2c6fc3520c52.png)
-![image](https://user-images.githubusercontent.com/70088342/160780884-22d6025e-9b7d-4493-8136-b3dfbf00a32f.png) -->
+16. Now move back to **sanity-ecom-main** using ```cd ../```
+17. Go to priyam Github account and create a new repository. Or create a new one if necessary.
+18. Write the shop name and click on Create a Repository. ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/d0e2760d-e68e-4b53-8964-ac655b82ac21)
+19. Run all the commands that appear when you click create [Instead of ```git add Readme.md``` run ```git add .```] run commands which are [** highlighted in the red box **] one by one
+20. Once done refresh the page. You will see all the code in that repo ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/1d8605e7-990b-4e59-a285-6a22460eab0c)
+
+21. Now visit [Vercel](https://vercel.com/login?next=%2Fdashboard) and log in with the GitHub account where we pushed our code.
+22. Vercel dashboard will open click on add ```new > project ``` ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/86fd2cba-8a87-4632-af15-85931af7dbdd)
+23. Find your GitHub repo and click on import  ![image](https://github.com/Rutwik187/sanity-ecom/assets/86617402/49c6dc54-355a-4c1b-b784-4d486b058239)
+24. Then finally click on ```Deoloy``` to host our frontend. The URL will be generated once deployment is done.
+
+    ## Hurrey Your site is finally deployed Now the changes on the sanity dashboard will be reflected on frontend ##
+
+
