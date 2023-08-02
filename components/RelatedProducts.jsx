@@ -9,7 +9,7 @@ import Category from "./Category";
 
 const RelatedProducts = ({ products }) => {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 500, stopOnMouseEnter: false }),
+    Autoplay({ delay: 1000, stopOnMouseEnter: false }),
     WheelGesturesPlugin(),
   ]);
 

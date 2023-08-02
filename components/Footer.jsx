@@ -20,7 +20,7 @@ const Footer = ({ info }) => {
               className="inline-flex items-center w-10 h-10"
             >
               <img
-                src={urlFor(info[0].logo)}
+                src={info[0] ? urlFor(info[0].logo).url() : ""}
                 alt="logo"
                 className="w-24 md:w-40"
               />
@@ -81,37 +81,37 @@ const Footer = ({ info }) => {
               <p className="mr-1 text-gray-800">Phone:</p>
               <a
                 target="_blank"
-                href={`tel:${info[0].phoneNo}`}
+                href={`tel:${info[0]?.phoneNo}`}
                 aria-label="Our phone"
                 title="Our phone"
                 className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
               >
-                {info[0].phoneNo}
+                {info[0]?.phoneNo}
               </a>
             </div>
             <div className="flex">
               <p className="mr-1 text-gray-800">Email:</p>
               <a
                 target="_blank"
-                href={`mailto:${info[0].email}`}
+                href={`mailto:${info[0]?.email}`}
                 aria-label="Our email"
                 title="Our email"
                 className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
               >
-                {info[0].email}
+                {info[0]?.email}
               </a>
             </div>
             <div className="flex">
               <p className="mr-1 text-gray-800">Address:</p>
               <a
-                href={info[0].addressUrl}
+                href={info[0]?.addressUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Our address"
                 title="Our address"
                 className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800 cursor-pointer"
               >
-                {info[0].address}
+                {info[0]?.address}
               </a>
             </div>
           </div>
@@ -122,7 +122,7 @@ const Footer = ({ info }) => {
             <div className="flex items-center mt-1 space-x-3">
               <a
                 target="_blank"
-                href={info[0].instagram}
+                href={info[0]?.instagram}
                 className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400 cursor-pointer"
               >
                 <svg viewBox="0 0 30 30" fill="currentColor" className="h-6">
@@ -132,7 +132,7 @@ const Footer = ({ info }) => {
               </a>
               <a
                 target="_blank"
-                href={info[0].facebook}
+                href={info[0]?.facebook}
                 className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">

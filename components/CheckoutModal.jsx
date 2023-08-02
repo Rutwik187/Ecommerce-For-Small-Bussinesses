@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
 
 import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
+
+import { runFireworks } from "../lib/utils";
 
 const style = {
   position: "absolute",
@@ -14,6 +16,10 @@ const style = {
 };
 
 export default function CheckoutModal({ coupon, subTotal, info }) {
+  useEffect(() => {
+    runFireworks();
+  }, []);
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,7 +29,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
   const address = useRef();
 
   const handleSendWhatsApp = () => {
-    const mobileNumber = info[0].phoneNo;
+    const mobileNumber = info[0].whatsAppNo;
     const message = encodeURIComponent(
       "📦 New order 📦\n\n" +
         cart

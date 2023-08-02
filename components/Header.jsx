@@ -49,7 +49,10 @@ const Header = ({ product, info }) => {
     >
       <Wrapper className="h-[60px] flex justify-between items-center">
         <Link href="/">
-          <img src={urlFor(info[0].logo)} className="w-[40px] md:w-[60px]" />
+          <img
+            src={info[0] ? urlFor(info[0].logo).url() : ""}
+            className="w-[40px] md:w-[60px]"
+          />
         </Link>
 
         <Menu

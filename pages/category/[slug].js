@@ -8,7 +8,7 @@ import { Product, Category, Footer } from '../../components';
 import { RelatedProducts } from '../../components';
 import Header from '../../components/Header';
 
-const Products = ({ categories, products, slug, infoData, productData }) => {
+const Products = ({ categories, products, slug, infoData, productData, featuredProducts }) => {
     // const { image, name, sellingPrice } = products;
 
 
@@ -26,7 +26,7 @@ const Products = ({ categories, products, slug, infoData, productData }) => {
                 </div>
             </div>
 
-            {/* <RelatedProducts products={categories} /> */}
+            <RelatedProducts products={featuredProducts} />
 
             <Footer info={infoData} />
         </div>
@@ -67,10 +67,12 @@ export const getStaticProps = async ({ params: { slug } }) => {
     const productData = await client.fetch(`*[_type=="product"]`)
     const infoData = await client.fetch(`*[_type=="info"]`)
 
+    const featuredProducts = await client.fetch(`*[_type == "product" && featureProduct == true]`)
+
 
 
     return {
-        props: { products, categories, slug, infoData, productData }
+        props: { products, categories, slug, infoData, productData, featuredProducts }
     }
 }
 

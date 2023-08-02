@@ -19,11 +19,18 @@ export default {
             options: {
                 hotspot: true,
             },
+            validation: Rule => Rule.required(),
 
         },
         {
             name: "phoneNo",
             title: "Phone Number",
+            type: "number",
+            validation: Rule => Rule.required(),
+        },
+        {
+            name: "whatsAppNo",
+            title: "Whats App Number [You will receive orders on this number]",
             type: "number",
             validation: Rule => Rule.required(),
         },
@@ -50,6 +57,7 @@ export default {
             options: {
                 hotspot: true,
             },
+            validation: Rule => Rule.required(),
         },
         {
             name: 'addressUrl',

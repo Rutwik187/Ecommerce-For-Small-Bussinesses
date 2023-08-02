@@ -24,7 +24,7 @@ const about = ({ productData, infoData }) => {
                                 <p className="px-4 mb-10 text-base leading-7 text-gray-500 ">
                                     <PortableText
                                         // Pass in block content straight from Sanity.io
-                                        value={infoData[0].aboutUs}
+                                        value={infoData[0]?.aboutUs}
                                         components={RichTextComponent}
                                     />
                                 </p>
@@ -32,7 +32,7 @@ const about = ({ productData, infoData }) => {
                             </div>
                         </div>
                         <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
-                            <img src={urlFor(infoData[0].shopImg)} alt="About Us"
+                            <img src={infoData[0] ? urlFor(infoData[0].shopImg).url() : ""} alt="About Us"
                                 className="relative  object-cover w-full h-full rounded" />
                         </div>
                     </div>
