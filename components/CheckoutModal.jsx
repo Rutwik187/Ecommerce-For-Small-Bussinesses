@@ -43,7 +43,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
         `\n\n Coupon Code: ${coupon} \n\n Subtotal: ${subTotal}\n` +
         `\n 🏡 Address: ${address.current.value}\n ☎️  Phone No.: ${phoneNo.current.value} \n 🙎 Name: ${name.current.value}`
     );
-    const whatsappURL = `https://api.whatsapp.com/send?phone=${mobileNumber}&text=${message}`;
+    const whatsappURL = `https://api.whatsapp.com/send?phone=91${mobileNumber}&text=${message}`;
 
     window.open(
       whatsappURL,
@@ -92,10 +92,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
                   />
                 </div>
                 <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    for="phoneNumber"
-                  >
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
                     Phone Number
                   </label>
                   <input
