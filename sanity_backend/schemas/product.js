@@ -1,3 +1,4 @@
+import { createImageField } from "sanity-pills"
 export default {
   name: 'product',
   title: 'Product',
@@ -17,7 +18,12 @@ export default {
         hotspot: true,
       },
 
-      validation: Rule => Rule.required(),
+      validations: {
+        required: true,
+        minWidth: 500,
+        maxHeight: 9000
+      },
+
     },
     {
       name: 'name',

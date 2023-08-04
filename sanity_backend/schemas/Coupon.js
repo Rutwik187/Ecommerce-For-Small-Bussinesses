@@ -15,5 +15,12 @@ export default {
 
         validation: Rule => Rule.required().max(100),
     },
+    {
+        name: 'totalGreaterThen',
+        title: 'Apply coupon only if the amount exceeds...',
+        type: 'number',
+
+        validation: Rule => Rule.required()
+    },
     ],
 };

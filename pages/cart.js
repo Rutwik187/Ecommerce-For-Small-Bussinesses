@@ -12,27 +12,19 @@ import BasicModal from "../components/CheckoutModal";
 import CheckoutModal from "../components/CheckoutModal";
 import { Footer } from "../components";
 import { runFireworks } from '../lib/utils';
+import Accordion from "../components/CouponAccordion";
 
 const Cart = ({ coupons, productData, infoData }) => {
 
-    const failureToast = () => {
-        toast.error("Invalid Coupon!!", {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
-    };
+
 
     const [couponValid, setCouponValid] = useState(false)
     const [percentDiscount, setPercentDiscount] = useState(0)
+    const [priceGreaterThen, setPriceGreaterThen] = useState(0)
     const [loading, setLoading] = useState(false);
     const inputRef = useRef(null)
     const [coupon, setCoupon] = useState('')
+    // const [totalPrice, setTotalPrice] = useState(0)
 
 
     const cart = useSelector((state) => state.cart.cart);
@@ -42,40 +34,72 @@ const Cart = ({ coupons, productData, infoData }) => {
 
         toast.success(`Congratulation coupon applied `, {
             position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
+
         });
     };
-    const handleValidCoupon = () => {
-        const enteredCoupon = inputRef.current.value
-        for (const couponObj of coupons) {
-            if (couponObj.coupon.toLowerCase() === enteredCoupon.toLowerCase()) {
-                setCouponValid(true)
-                setCoupon(couponObj.coupon)
-                setPercentDiscount(couponObj.percentageDiscount)
-                runFireworks();
-                successToast()
-                break
-            }
-            else {
-                failureToast()
-                setCouponValid(false)
-                setPercentDiscount(0)
-
-            }
-        }
-    }
-
+    const failureToast = () => {
+        toast.error(`Invalid coupon`, {
+            position: "bottom-right",
+        });
+    };
+    const addItemsToast = () => {
+        toast.error(`Add more items to the cart`, {
+            position: "bottom-right",
+        });
+    };
+    const couponExitsToast = () => {
+        toast.error(`Coupon already exists`, {
+            position: "bottom-right",
+        });
+    };
 
     const totalPrice = cart.reduce((total, item) => {
         const totalAmount = total + item.count * item.discountedPrice;
         return Math.floor(totalAmount - (totalAmount * (percentDiscount / 100)))
     }, 0)
+
+    const handleValidCoupon = () => {
+        const enteredCoupon = inputRef.current.value
+        for (const couponObj of coupons) {
+            if (couponObj.coupon.toLowerCase() === enteredCoupon.toLowerCase()) {
+                if (couponObj.totalGreaterThen <= totalPrice) {
+                    if (couponValid == true) {
+                        couponExitsToast()
+                        setPercentDiscount(couponObj.percentageDiscount)
+                        continue
+                    }
+                    else {
+                        runFireworks();
+                        successToast()
+                        setCouponValid(true)
+                        setCoupon(couponObj.coupon)
+                        setPercentDiscount(couponObj.percentageDiscount)
+                        setPriceGreaterThen(couponObj.totalGreaterThen)
+                    }
+
+                }
+                else {
+                    addItemsToast()
+                    // setCouponValid(false)
+                    setPercentDiscount(0)
+                }
+            }
+            else {
+
+                // setCouponValid(false)
+                setPercentDiscount(0)
+
+            }
+        }
+        // if (couponValid == true) {
+        //     runFireworks();
+        //     successToast()
+        // }
+
+    }
+
+
+
 
     return (
         <div>
@@ -121,17 +145,14 @@ const Cart = ({ coupons, productData, infoData }) => {
                                         </div>
                                         <div className="text-sm md:text-md py-5 border-t mt-5">
                                             The subtotal reflects the total price of
-                                            your order, including duties and taxes,
-                                            before any applicable discounts. It does
-                                            not include delivery costs and
-                                            international transaction fees.
+                                            your order, including any applicable discounts, duties and taxes.
                                         </div>
                                     </div>
 
                                     <div className="p-4">
                                         <p className="text-sm md:text-md py-5 border-t ">If you have a coupon code, please enter it in the box below</p>
                                         <div className="justify-start md:flex">
-                                            <form action="" method="POST">
+                                            <form action="" >
                                                 <div className="flex items-center w-full h-13 pl-3  bg-gray-100 border rounded-full">
 
                                                     <input ref={inputRef} type="coupon" name="code" id="coupon" placeholder="Apply coupon"
@@ -144,6 +165,7 @@ const Cart = ({ coupons, productData, infoData }) => {
                                                 </div>
                                             </form>
                                         </div>
+                                        <Accordion coupons={coupons} />
                                     </div>
 
 
