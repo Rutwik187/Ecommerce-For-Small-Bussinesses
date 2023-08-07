@@ -43,7 +43,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
         `\n\n Coupon Code: ${coupon} \n\n Subtotal: ${subTotal}\n` +
         `\n 🏡 Address: ${address.current.value}\n ☎️  Phone No.: ${phoneNo.current.value} \n 🙎 Name: ${name.current.value}`
     );
-    const whatsappURL = `https://api.whatsapp.com/send?phone=91${info[0].whatsAppNo}&text=${message}`;
+    const whatsappURL = `https://wa.me/${info[0].whatsAppNo}?text=${message}`;
 
     window.open(
       whatsappURL,
