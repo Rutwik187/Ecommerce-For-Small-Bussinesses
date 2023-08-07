@@ -41,25 +41,25 @@ const Footer = ({ info }) => {
               Quick Links
             </p>
             <div className="flex">
-              <Link
+              <a
                 href="/"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
               >
                 Home
-              </Link>
+              </a>
             </div>
             <div className="flex">
-              <Link
+              <a
                 href="/about"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
               >
                 About
-              </Link>
+              </a>
             </div>
             <div className="flex">
               <a
                 href="/blogs/allBlogs"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
               >
                 Blogs
               </a>
@@ -67,7 +67,7 @@ const Footer = ({ info }) => {
             <div className="flex">
               <a
                 href="/contact"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
               >
                 Contact Us
               </a>
@@ -84,7 +84,7 @@ const Footer = ({ info }) => {
                 href={`tel:${info[0]?.phoneNo}`}
                 aria-label="Our phone"
                 title="Our phone"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
               >
                 {info[0]?.phoneNo}
               </a>
@@ -96,7 +96,7 @@ const Footer = ({ info }) => {
                 href={`mailto:${info[0]?.email}`}
                 aria-label="Our email"
                 title="Our email"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
               >
                 {info[0]?.email}
               </a>
@@ -109,7 +109,7 @@ const Footer = ({ info }) => {
                 rel="noopener noreferrer"
                 aria-label="Our address"
                 title="Our address"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800 cursor-pointer"
+                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600 cursor-pointer"
               >
                 {info[0]?.address}
               </a>
@@ -123,7 +123,7 @@ const Footer = ({ info }) => {
               <a
                 target="_blank"
                 href={info[0]?.instagram}
-                className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400 cursor-pointer"
+                className="text-gray-500 transition-colors duration-300 hover:text-green-600 cursor-pointer"
               >
                 <svg viewBox="0 0 30 30" fill="currentColor" className="h-6">
                   <circle cx="15" cy="15" r="4" />
@@ -133,7 +133,7 @@ const Footer = ({ info }) => {
               <a
                 target="_blank"
                 href={info[0]?.facebook}
-                className="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                className="text-gray-500 transition-colors duration-300 hover:text-green-600 cursor-pointer"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
                   <path d="M22,0H2C0.895,0,0,0.895,0,2v20c0,1.105,0.895,2,2,2h11v-9h-3v-4h3V8.413c0-3.1,1.893-4.788,4.659-4.788 c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.795,0.715-1.795,1.763V11h4.44l-1,4h-3.44v9H22c1.105,0,2-0.895,2-2 V2C24,0.895,23.105,0,22,0z" />

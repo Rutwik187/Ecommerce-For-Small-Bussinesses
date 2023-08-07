@@ -24,7 +24,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
           <React.Fragment key={item.id}>
             {!!item?.subMenu ? (
               <li
-                className="cursor-pointer flex items-center gap-2 relative"
+                className="cursor-pointer flex items-center gap-2 relative transition duration-300 hover:text-green-400"
                 onMouseEnter={() => setShowCatMenu(true)}
                 onMouseLeave={() => setShowCatMenu(false)}
               >
@@ -40,7 +40,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
                           href={`/category/${c.slug}`}
                           onClick={() => setShowCatMenu(false)}
                         >
-                          <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
+                          <li className="h-12 flex justify-between items-center px-3 hover:text-green-400 rounded-md ">
                             {c.name}
                             <span className="opacity-50 text-sm">
                               {`(${c.products.data.length})`}
@@ -53,7 +53,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
                 )}
               </li>
             ) : (
-              <li className="cursor-pointer">
+              <li className="cursor-pointer transition duration-300 hover:text-green-600 ">
                 <Link href={item?.url}>{item.name}</Link>
               </li>
             )}
