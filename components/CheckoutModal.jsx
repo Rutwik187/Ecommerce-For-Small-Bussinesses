@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import Box from "@mui/material/Box";
 
 import Modal from "@mui/material/Modal";
@@ -22,8 +22,42 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
   const phoneNo = useRef();
   const address = useRef();
 
+  const [phoneError, setPhoneError] = useState("");
+  const [addressError, setAddressError] = useState("");
+
+  const handlePhoneChange = () => {
+    const phoneNumber = phoneNo.current.value;
+    if (phoneNumber.length === 10) {
+      setPhoneError("");
+    }
+  };
+
+  const handleAddressChange = () => {
+    const userAddress = address.current.value;
+    if (userAddress.length >= 25) {
+      setAddressError("");
+    }
+  };
+
   const mobileNumber = info[0].whatsAppNo;
   const handleSendWhatsApp = () => {
+    const phoneNumber = phoneNo.current.value;
+    const userAddress = address.current.value;
+
+    if (phoneNumber.length !== 10) {
+      setPhoneError("Phone number must be 10 digits.");
+      return;
+    } else {
+      setPhoneError("");
+    }
+
+    if (userAddress.length < 25) {
+      setAddressError("Address must be at least 25 characters.");
+      return;
+    } else {
+      setAddressError("");
+    }
+
     const message = encodeURIComponent(
       "📦 New order 📦\n\n" +
         cart
@@ -97,7 +131,11 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
                     placeholder={mobileNumber}
                     ref={phoneNo}
                     required
+                    onChange={handlePhoneChange}
                   />
+                  {phoneError && (
+                    <p className="text-red-500 text-sm">{phoneError}</p>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label
@@ -112,8 +150,12 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
                     name="address"
                     placeholder="address"
                     ref={address}
+                    onChange={handleAddressChange}
                     required
                   />
+                  {addressError && (
+                    <p className="text-red-500 text-sm">{addressError}</p>
+                  )}
                 </div>
                 <div className="mb-4">
                   <i
