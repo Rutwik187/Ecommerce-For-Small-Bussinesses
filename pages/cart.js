@@ -219,7 +219,7 @@ const Cart = ({ coupons, productData, infoData }) => {
 export default Cart;
 
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const coupons = await client.fetch(`*[_type == 'coupon']`)
     const productData = await client.fetch(`*[_type=="product"]`)
     const infoData = await client.fetch(`*[_type=="info"]`)
