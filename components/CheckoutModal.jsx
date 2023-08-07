@@ -19,6 +19,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
   useEffect(() => {
     runFireworks();
   }, []);
+  const mobileNumber = info[0].whatsAppNo;
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -29,7 +30,6 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
   const address = useRef();
 
   const handleSendWhatsApp = () => {
-    // const mobileNumber = info[0].whatsAppNo;
     const message = encodeURIComponent(
       "📦 New order 📦\n\n" +
         cart
@@ -43,7 +43,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
         `\n\n Coupon Code: ${coupon} \n\n Subtotal: ${subTotal}\n` +
         `\n 🏡 Address: ${address.current.value}\n ☎️  Phone No.: ${phoneNo.current.value} \n 🙎 Name: ${name.current.value}`
     );
-    const whatsappURL = `https://wa.me/${info[0].whatsAppNo}?text=${message}`;
+    const whatsappURL = `https://wa.me/${mobileNumber}?text=${message}`;
 
     window.open(
       whatsappURL,
@@ -54,6 +54,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
 
   return (
     <div>
+      {console.log(info[0].whatsAppNo)}
       <button
         onClick={handleOpen}
         className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
@@ -100,7 +101,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
                     type="number"
                     id="phoneNumber"
                     name="phoneNumber"
-                    placeholder="9896857412"
+                    placeholder={mobileNumber}
                     ref={phoneNo}
                     required
                   />
