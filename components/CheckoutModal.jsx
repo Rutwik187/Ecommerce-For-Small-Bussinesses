@@ -4,8 +4,6 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
 
-import { runFireworks } from "../lib/utils";
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -16,10 +14,6 @@ const style = {
 };
 
 export default function CheckoutModal({ coupon, subTotal, info }) {
-  useEffect(() => {
-    runFireworks();
-  }, []);
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

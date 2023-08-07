@@ -8,7 +8,6 @@ import { RiCoupon4Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header";
-import BasicModal from "../components/CheckoutModal";
 import CheckoutModal from "../components/CheckoutModal";
 import { Footer } from "../components";
 import { runFireworks } from '../lib/utils';
