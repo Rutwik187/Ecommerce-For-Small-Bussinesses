@@ -23,7 +23,7 @@ const Cart = ({ coupons, productData, infoData, categories }) => {
     const [loading, setLoading] = useState(false);
     const inputRef = useRef(null)
     const [coupon, setCoupon] = useState('')
-    // const [totalPrice, setTotalPrice] = useState(0)
+
 
 
     const cart = useSelector((state) => state.cart.cart);
@@ -54,21 +54,36 @@ const Cart = ({ coupons, productData, infoData, categories }) => {
 
     const totalPrice = cart.reduce((total, item) => {
         const totalAmount = total + item.count * item.discountedPrice;
+        return Math.floor(totalAmount)
+    }, 0)
+
+    const finalPrice = cart.reduce((total, item) => {
+        const totalAmount = total + item.count * item.discountedPrice;
         return Math.floor(totalAmount - (totalAmount * (percentDiscount / 100)))
     }, 0)
+
+
+
+    const couponDiscount = cart.reduce((total, item) => {
+        const totalAmount = total + item.count * item.discountedPrice;
+        return Math.floor(totalAmount * (percentDiscount / 100))
+    }, 0)
+
+
 
     const handleValidCoupon = () => {
         const enteredCoupon = inputRef.current.value
         for (const couponObj of coupons) {
             if (couponObj.coupon.toLowerCase() === enteredCoupon.toLowerCase()) {
-                if (couponObj.totalGreaterThen <= totalPrice) {
+                if (couponObj.totalGreaterThen <= finalPrice) {
                     if (couponValid == true) {
+
                         couponExitsToast()
                         setPercentDiscount(couponObj.percentageDiscount)
                         continue
                     }
                     else {
-                        runFireworks();
+
                         successToast()
                         setCouponValid(true)
                         setCoupon(couponObj.coupon)
@@ -134,22 +149,45 @@ const Cart = ({ coupons, productData, infoData, categories }) => {
                                     <div className="text-lg font-bold">Summary</div>
 
                                     <div className="p-5 my-5 bg-black/[0.05] rounded-xl">
-                                        <div className="flex justify-between">
-                                            <div className="uppercase text-md md:text-lg font-medium text-black">
-                                                Subtotal
+                                        <div>
+                                            <div className="flex justify-between">
+
+                                                <div className="uppercase text-md md:text-lg font-medium text-black">
+                                                    Total
+                                                </div>
+                                                <div className="text-md md:text-lg font-medium text-black">
+                                                    &#8377;{totalPrice}
+                                                </div>
                                             </div>
-                                            <div className="text-md md:text-lg font-medium text-black">
-                                                &#8377;{totalPrice}
+                                            <br />
+
+
+                                            <div className="flex justify-between">
+
+                                                <div className="uppercase text-md md:text-lg font-medium text-black">
+                                                    Coupon Discount
+                                                </div>
+                                                <div className="text-md md:text-lg font-medium text-green-500">
+                                                    &#8377;{couponDiscount}
+                                                </div>
                                             </div>
+
                                         </div>
-                                        <div className="text-sm md:text-md py-5 border-t mt-5">
-                                            The subtotal reflects the total price of
-                                            your order, including any applicable discounts, duties and taxes.
+                                        <br />
+                                        <div className="flex justify-between border-t">
+
+
+                                            <div className="uppercase text-md md:text-lg text-black mt-3 font-extrabold">
+                                                Final Price
+                                            </div>
+                                            <div className="mt-3 text-md md:text-lg font-extrabold text-black-900 ">
+                                                &#8377;{finalPrice}
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="p-4">
-                                        <p className="text-sm md:text-md py-5 border-t ">If you have a coupon code, please enter it in the box below</p>
+                                    <div className="p-4 border-t">
+                                        <p className="text-sm md:text-md py-5  ">If you have a coupon code, please enter it in the box below</p>
                                         <div className="justify-start md:flex">
                                             <form action="" >
                                                 <div className="flex items-center w-full h-13 pl-3  bg-gray-100 border rounded-full">
@@ -170,7 +208,7 @@ const Cart = ({ coupons, productData, infoData, categories }) => {
 
 
                                     {/* Checkout form */}
-                                    <CheckoutModal info={infoData} coupon={coupon} subTotal={totalPrice} />
+                                    <CheckoutModal info={infoData} coupon={coupon} couponDiscount={couponDiscount} subTotal={finalPrice} />
 
 
                                 </div>

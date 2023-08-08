@@ -13,7 +13,12 @@ const style = {
   borderRadius: "16px",
 };
 
-export default function CheckoutModal({ coupon, subTotal, info }) {
+export default function CheckoutModal({
+  coupon,
+  subTotal,
+  info,
+  couponDiscount,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -68,7 +73,7 @@ export default function CheckoutModal({ coupon, subTotal, info }) {
               } = ₹${product.count * product.discountedPrice}`
           )
           .join("\n") +
-        `\n\n Coupon Code: ${coupon} \n\n Subtotal: ${subTotal}\n` +
+        `\n\n Coupon Code: ${coupon} \n Coupon Discount : ₹${couponDiscount}  \n\n Subtotal: ${subTotal}\n` +
         `\n 🏡 Address: ${address.current.value}\n ☎️  Phone No.: ${phoneNo.current.value} \n 🙎 Name: ${name.current.value}`
     );
     const whatsappURL = `https://api.whatsapp.com/send?phone=91${mobileNumber}&text=${message}`;
