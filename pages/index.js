@@ -12,7 +12,7 @@ import { IconContext } from "react-icons";
 
 const Home = ({ miniBannerData, featureProductsData, bannerData, categories, productData, brandData, infoData }) => (
   <div >
-    <Header product={productData} info={infoData} />
+    <Header product={productData} info={infoData} categories={categories} />
 
     <HeroBanner heroBanner={bannerData} />
     <MiniBanners miniBanner={miniBannerData} />

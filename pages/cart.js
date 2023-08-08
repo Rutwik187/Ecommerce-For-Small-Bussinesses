@@ -13,7 +13,7 @@ import { Footer } from "../components";
 import { runFireworks } from '../lib/utils';
 import Accordion from "../components/CouponAccordion";
 
-const Cart = ({ coupons, productData, infoData }) => {
+const Cart = ({ coupons, productData, infoData, categories }) => {
 
 
 
@@ -102,7 +102,7 @@ const Cart = ({ coupons, productData, infoData }) => {
 
     return (
         <div>
-            <Header product={productData} info={infoData} />
+            <Header product={productData} info={infoData} categories={categories} />
             <div className="w-full md:py-20">
 
                 <Wrapper>
@@ -222,10 +222,12 @@ export const getServerSideProps = async () => {
     const coupons = await client.fetch(`*[_type == 'coupon']`)
     const productData = await client.fetch(`*[_type=="product"]`)
     const infoData = await client.fetch(`*[_type=="info"]`)
+    const categoryQuery = '*[_type == "category"]';
+    const categories = await client.fetch(categoryQuery);
 
     return {
         props: {
-            coupons, infoData, productData
+            coupons, infoData, productData, categories
         }
     }
 }

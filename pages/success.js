@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import { Footer } from '../components';
 import { client } from '../lib/client';
 
-const Success = ({ productData, infoData
+const Success = ({ productData, infoData, categories
 }) => {
 
 
@@ -18,7 +18,7 @@ const Success = ({ productData, infoData
 
   return (
     <>
-      <Header product={productData} info={infoData} />
+      <Header product={productData} info={infoData} categories={categories} />
       <div className="success-wrapper mb-12">
         <div className="success">
           <p className="icon">
@@ -53,9 +53,11 @@ export const getServerSideProps = async () => {
 
   const productData = await client.fetch(`*[_type=="product"]`)
   const infoData = await client.fetch(`*[_type=="info"]`)
+  const categoryQuery = '*[_type == "category"]';
+  const categories = await client.fetch(categoryQuery);
 
   return {
-    props: { infoData, productData }
+    props: { infoData, productData, categories }
   }
 }
 

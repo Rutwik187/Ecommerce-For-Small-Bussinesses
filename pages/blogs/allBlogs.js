@@ -4,10 +4,10 @@ import { client, urlFor } from '../../lib/client'
 import Link from "next/link";
 import { Footer } from '../../components';
 
-const allBlogs = ({ productData, blogs, infoData }) => {
+const allBlogs = ({ productData, blogs, infoData, categories }) => {
     return (
         <>
-            <Header product={productData} info={infoData} />
+            <Header product={productData} info={infoData} categories={categories} />
             {
                 blogs?.map((post, index) => (
                     <Link href={`/blogs/${post.slug.current}`} key={index} class="flex flex-col justify-center antialiased  text-gray-800 min-h-screen gap-4">
@@ -49,9 +49,11 @@ export const getStaticProps = async () => {
     const blogs = await client.fetch(`*[_type == 'blog']`)
     const productData = await client.fetch(`*[_type=="product"]`)
     const infoData = await client.fetch(`*[_type=="info"]`)
+    const categoryQuery = '*[_type == "category"]';
+    const categories = await client.fetch(categoryQuery);
 
     return {
-        props: { blogs, productData, infoData }
+        props: { blogs, productData, infoData, categories }
     }
 }
 

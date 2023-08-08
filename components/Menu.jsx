@@ -4,9 +4,10 @@ import { BsChevronDown } from "react-icons/bs";
 
 const data = [
   { id: 1, name: "Home", url: "/" },
-  { id: 2, name: "About", url: "/about" },
-  { id: 3, name: "Blogs", url: "/blogs/allBlogs" },
-  { id: 4, name: "Contact", url: "/contact" },
+  { id: 2, name: "Categories", subMenu: true },
+  { id: 3, name: "About", url: "/about" },
+  { id: 4, name: "Blogs", url: "/blogs/allBlogs" },
+  { id: 5, name: "Contact", url: "/contact" },
 ];
 
 const subMenuData = [
@@ -33,18 +34,18 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
 
                 {showCatMenu && (
                   <ul className="bg-white absolute top-6 left-0 min-w-[250px] px-1 py-1 text-black shadow-lg">
-                    {categories?.map(({ attributes: c, id }) => {
+                    {categories?.map((category, index) => {
                       return (
                         <Link
-                          key={id}
-                          href={`/category/${c.slug}`}
+                          key={index}
+                          href={`/category/${category.slug.current}`}
                           onClick={() => setShowCatMenu(false)}
                         >
-                          <li className="h-12 flex justify-between items-center px-3 hover:text-green-400 rounded-md ">
-                            {c.name}
-                            <span className="opacity-50 text-sm">
+                          <li className="h-12 flex justify-between items-center px-3 hover:text-green-400 rounded-md text-gray-900">
+                            {category.name}
+                            {/* <span className="opacity-50 text-sm">
                               {`(${c.products.data.length})`}
-                            </span>
+                            </span> */}
                           </li>
                         </Link>
                       );

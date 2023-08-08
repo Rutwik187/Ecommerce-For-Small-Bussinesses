@@ -6,10 +6,10 @@ import { RichTextComponent } from '../components/RichTextComponent';
 import { urlFor } from '../lib/client';
 import { client } from '../lib/client';
 
-const about = ({ productData, infoData }) => {
+const about = ({ productData, infoData, categories }) => {
     return (
         <>
-            <Header product={productData} info={infoData} />
+            <Header product={productData} info={infoData} categories={categories} />
             <section className="py-10 lg:py-20  font-poppins">
                 <div className="max-w-6xl py-4 mx-auto lg:py-6 md:px-6">
                     <div className="flex flex-wrap ">
@@ -47,8 +47,12 @@ export const getServerSideProps = async () => {
     const productData = await client.fetch(`*[_type=="product"]`)
     const infoData = await client.fetch(`*[_type=="info"]`)
 
+    const categoryQuery = '*[_type == "category"]';
+    const categories = await client.fetch(categoryQuery);
+
+
     return {
-        props: { infoData, productData }
+        props: { infoData, productData, categories }
     }
 
 }

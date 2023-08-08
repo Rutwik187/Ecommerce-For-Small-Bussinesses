@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
 const Coupon = ({ percentageDiscount, totalGreaterThen, coupon }) => {
-  {
-    console.log(coupon);
-  }
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopyClick = () => {

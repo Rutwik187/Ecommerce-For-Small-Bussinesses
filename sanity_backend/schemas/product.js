@@ -1,4 +1,6 @@
+import { getExtension, getImageDimensions } from '@sanity/asset-utils'
 import { createImageField } from "sanity-pills"
+
 export default {
   name: 'product',
   title: 'Product',
@@ -18,11 +20,20 @@ export default {
         hotspot: true,
       },
 
-      validations: {
-        required: true,
-        minWidth: 500,
-        maxHeight: 9000
-      },
+      validation: Rule => Rule.custom(images => {
+        if (!images || !Array.isArray(images)) {
+          return true; // No images to validate, so it's valid
+        }
+
+        const maxSizeInBytes = 2 * 1024 * 1024; // 2MB in bytes
+
+        const oversizedImages = images.filter(image => image.size > maxSizeInBytes);
+        if (oversizedImages.length > 0) {
+          return 'Some images exceed the maximum size of 2MB.';
+        }
+
+        return true; // All images are within size limits
+      }),
 
     },
     {

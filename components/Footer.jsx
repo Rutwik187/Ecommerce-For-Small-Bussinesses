@@ -41,36 +41,24 @@ const Footer = ({ info }) => {
               Quick Links
             </p>
             <div className="flex">
-              <a
-                href="/"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
-              >
-                Home
-              </a>
+              <li className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600">
+                <Link href="/">Home</Link>
+              </li>
             </div>
             <div className="flex">
-              <a
-                href="/about"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
-              >
-                About
-              </a>
+              <li className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600">
+                <Link href="/about">About</Link>
+              </li>
             </div>
             <div className="flex">
-              <a
-                href="/blogs/allBlogs"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
-              >
-                Blogs
-              </a>
+              <li className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600">
+                <Link href="/blogs/allBlogs">Blogs</Link>
+              </li>
             </div>
             <div className="flex">
-              <a
-                href="/contact"
-                className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600"
-              >
-                Contact Us
-              </a>
+              <li className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-green-600 cursor-pointer">
+                <Link href="/contact">Contact Us</Link>
+              </li>
             </div>
           </div>
           <div className="space-y-2 text-sm">

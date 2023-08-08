@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import SearchBar from "./SearchBar";
 import { urlFor } from "../lib/client";
 
-const Header = ({ product, info }) => {
+const Header = ({ product, info, categories }) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [show, setShow] = useState("translate-y-0");
@@ -22,6 +22,8 @@ const Header = ({ product, info }) => {
   // const [categories, setCategories] = useState(null);
 
   const { cart } = useSelector((state) => state.cart);
+
+  // setCategories(categoryData);
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -58,15 +60,15 @@ const Header = ({ product, info }) => {
         <Menu
           showCatMenu={showCatMenu}
           setShowCatMenu={setShowCatMenu}
-          // categories={categories}
+          categories={categories}
         />
 
         {mobileMenu && (
           <MenuMobile
+            categories={categories}
             showCatMenu={showCatMenu}
             setShowCatMenu={setShowCatMenu}
             setMobileMenu={setMobileMenu}
-            // categories={categories}
           />
         )}
 

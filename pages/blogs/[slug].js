@@ -10,11 +10,11 @@ import { Footer } from "../../components";
 
 
 
-const BlogPage = ({ post, productData, infoData }) => {
+const BlogPage = ({ post, productData, infoData, categories }) => {
 
     return (
         <>
-            <Header product={productData} info={infoData} />
+            <Header product={productData} info={infoData} categories={categories} />
 
             <div>
                 <div className="container px-4 mx-auto py-6 md:py-10">
@@ -69,10 +69,12 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params: { slug } }) => {
+    const categoryQuery = '*[_type == "category"]';
+    const categories = await client.fetch(categoryQuery);
     const post = await client.fetch(`*[_type == "blog" && slug.current == '${slug}'][0]`)
     const productData = await client.fetch(`*[_type=="product"]`)
     const infoData = await client.fetch(`*[_type=="info"]`)
     return {
-        props: { post, productData, infoData }
+        props: { post, productData, infoData, categories }
     }
 }

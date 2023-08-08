@@ -19,7 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from '../../components/Header';
 
 
-const ProductDetails = ({ product, products, infoData }) => {
+const ProductDetails = ({ product, products, infoData, categories }) => {
   const { image, name, description, listPrice, discountedPrice } = product;
   const dispatch = useDispatch();
 
@@ -44,7 +44,7 @@ const ProductDetails = ({ product, products, infoData }) => {
 
   return (
     <div>
-      <Header product={products} info={infoData} />
+      <Header product={products} info={infoData} categories={categories} />
       <div className="w-full md:py-20">
 
         <Wrapper>
@@ -199,11 +199,14 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
   const infoData = await client.fetch(`*[_type=="info"]`)
 
+  const categoryQuery = '*[_type == "category"]';
+  const categories = await client.fetch(categoryQuery);
+
 
 
 
   return {
-    props: { products, product, infoData }
+    props: { products, product, infoData, categories }
   }
 }
 

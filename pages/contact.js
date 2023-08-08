@@ -5,7 +5,7 @@ import Header from '../components/Header'
 import { info } from 'autoprefixer'
 
 
-const contact = ({ infoData, productData }) => {
+const contact = ({ infoData, productData, categories }) => {
     const name = useRef();
     const email = useRef();
     const message = useRef();
@@ -28,7 +28,7 @@ const contact = ({ infoData, productData }) => {
 
     return (
         <div >
-            <Header info={infoData} product={productData} />
+            <Header info={infoData} product={productData} categories={categories} />
             <div className=" container my-24 mx-auto md:px-6">
 
                 <section className="mb-32 text-center">
@@ -150,8 +150,11 @@ export const getServerSideProps = async () => {
     const productData = await client.fetch(`*[_type=="product"]`)
     const infoData = await client.fetch(`*[_type=="info"]`)
 
+    const categoryQuery = '*[_type == "category"]';
+    const categories = await client.fetch(categoryQuery);
+
     return {
-        props: { infoData, productData }
+        props: { infoData, productData, categories }
     }
 }
 
