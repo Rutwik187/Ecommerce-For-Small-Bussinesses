@@ -33,7 +33,7 @@ const about = ({ productData, infoData, categories }) => {
                         </div>
                         <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
                             <img src={infoData[0] ? urlFor(infoData[0].shopImg).url() : ""} alt="About Us"
-                                className="relative  object-cover w-full h-full rounded" />
+                                className="relative  object-contain w-full h-full rounded " />
                         </div>
                     </div>
                 </div>
