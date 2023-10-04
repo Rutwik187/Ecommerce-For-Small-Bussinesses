@@ -41,6 +41,18 @@ export default {
 
         },
         {
+            name: "freeDelivery",
+            title: "Free order on cart value above",
+            type: "number",
+
+        },
+        {
+            name: "deliveryCharges",
+            title: "Delivery Charges",
+            type: "number",
+
+        },
+        {
             name: 'address',
             title: "Address",
             type: "string",

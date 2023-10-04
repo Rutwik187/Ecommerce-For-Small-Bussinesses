@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 
 import Modal from "@mui/material/Modal";
@@ -19,7 +19,8 @@ export default function CheckoutModal({
   info,
   couponDiscount,
 }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  // const [deliveryCharge, setDeliveryCharge] = useState(0);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const cart = useSelector((state) => state.cart.cart);
@@ -45,6 +46,14 @@ export default function CheckoutModal({
   };
 
   const mobileNumber = info[0].whatsAppNo;
+
+  let deliveryCharge = 0;
+  if (subTotal < info[0].freeDelivery) {
+    // setDeliveryCharge(100);
+    deliveryCharge = info[0].deliveryCharges;
+  }
+  console.log(deliveryCharge);
+
   const handleSendWhatsApp = () => {
     const phoneNumber = phoneNo.current.value;
     const userAddress = address.current.value;
@@ -73,7 +82,9 @@ export default function CheckoutModal({
               } = ₹${product.count * product.discountedPrice}`
           )
           .join("\n") +
-        `\n\n Coupon Code: ${coupon} \n Coupon Discount : ₹${couponDiscount}  \n\n Subtotal: ${subTotal}\n` +
+        `\n\n Coupon Code: ${coupon} \n Coupon Discount : ₹${couponDiscount} \n Delivery Charges : ₹${deliveryCharge}  \n\n Subtotal: ${
+          subTotal + deliveryCharge
+        }\n` +
         `\n 🏡 Address: ${address.current.value}\n ☎️  Phone No.: ${phoneNo.current.value} \n 🙎 Name: ${name.current.value}`
     );
     const whatsappURL = `https://api.whatsapp.com/send?phone=91${mobileNumber}&text=${message}`;
