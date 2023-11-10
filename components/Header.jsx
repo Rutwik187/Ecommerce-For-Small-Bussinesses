@@ -52,8 +52,8 @@ const Header = ({ product, info, categories }) => {
       <Wrapper className="h-[60px] flex justify-between items-center">
         <Link href="/">
           <img
-            src={info[0] ? urlFor(info[0].logo).url() : ""}
-            className="w-[40px] md:w-[60px]"
+            src={info.length > 0 ? urlFor(info[0].logo).url() : ""}
+            className="w-[80px] md:w-[100px]"
           />
         </Link>
 

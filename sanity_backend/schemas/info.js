@@ -1,4 +1,5 @@
 import { BiInfoCircle } from "react-icons/bi";
+import blockContent from "./blockContent";
 
 export default {
     name: "info",
@@ -72,6 +73,15 @@ export default {
             validation: Rule => Rule.required(),
         },
         {
+            name: 'payQR',
+            title: 'Payment QR',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+
+        },
+        {
             name: 'addressUrl',
             title: 'Google Maps Url',
             type: "url"
@@ -91,6 +101,11 @@ export default {
             name: 'embedMap',
             title: 'Embed Map in contact us [copy from only https.;. before width...',
             type: 'url'
+        },
+        {
+            name: 'termsAndConditions',
+            title: 'Terms and Conditions',
+            type: 'blockContent',
         }
 
 

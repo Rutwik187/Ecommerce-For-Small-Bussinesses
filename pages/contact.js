@@ -68,7 +68,7 @@ const contact = ({ infoData, productData, categories }) => {
                                     <div
                                         className="relative h-[700px] rounded-lg shadow-lg dark:shadow-black/20">
                                         <iframe
-                                            src={infoData[0].embedMap}
+                                            src={infoData[0] ? infoData[0].embedMap : ""}
                                             className="absolute left-0 top-0 h-full w-full rounded-lg"
                                             frameborder="0"
                                             allowfullscreen></iframe>
@@ -94,12 +94,12 @@ const contact = ({ infoData, productData, categories }) => {
                             <h6 className="font-medium">
                                 <a
                                     target="_blank"
-                                    href={`mailto:${infoData[0].email}`}
+                                    href={infoData[0] ? `mailto:${infoData[0].email}` : ""}
                                     aria-label="Our email"
                                     title="Our email"
                                     className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
                                 >
-                                    {infoData[0].email}
+                                    {infoData[0] ? infoData[0].email : ""}
                                 </a>
                             </h6>
                         </div>
@@ -111,14 +111,14 @@ const contact = ({ infoData, productData, categories }) => {
                                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                             </svg>
                             <h6 className="font-medium"><a
-                                href={infoData[0].addressUrl}
+                                href={infoData[0] ? infoData[0].addressUrl : ""}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Our address"
                                 title="Our address"
                                 className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800 cursor-pointer"
                             >
-                                {infoData[0].address}
+                                {infoData[0] ? infoData[0].address : ""}
                             </a></h6>
                         </div>
                         <div className="mx-auto mb-6 text-center md:mb-0">
@@ -129,12 +129,12 @@ const contact = ({ infoData, productData, categories }) => {
                             </svg>
                             <h6 className="font-medium"> <a
                                 target="_blank"
-                                href={`tel:${infoData[0].phoneNo}`}
+                                href={infoData[0] ? `tel:${infoData[0].phoneNo}` : ""}
                                 aria-label="Our phone"
                                 title="Our phone"
                                 className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
                             >
-                                {infoData[0].phoneNo}
+                                {infoData[0] ? infoData[0].phoneNo : ""}
                             </a></h6>
                         </div>
 

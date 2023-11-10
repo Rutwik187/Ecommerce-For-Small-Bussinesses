@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { urlFor } from "../lib/client";
+import TermsAndConditions from "./TermsAndConditions";
 const Footer = ({ info }) => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
@@ -25,16 +26,6 @@ const Footer = ({ info }) => {
                 className="w-24 md:w-40"
               />
             </Link>
-            {/* <div className="mt-6 lg:max-w-sm">
-            <p className="text-sm text-gray-800">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
-            </p>
-            <p className="mt-4 text-sm text-gray-800">
-              Eaque ipsa quae ab illo inventore veritatis et quasi architecto
-              beatae vitae dicta sunt explicabo.
-            </p>
-          </div> */}
           </div>
           <div className="space-y-2 text-sm">
             <p className="text-base font-bold tracking-wide text-gray-900">
@@ -139,6 +130,7 @@ const Footer = ({ info }) => {
             © Copyright {currentYear} Priyam IT Services Private Limited. All
             rights reserved.
           </a>
+          <TermsAndConditions info={info} />
         </div>
       </div>
     </div>

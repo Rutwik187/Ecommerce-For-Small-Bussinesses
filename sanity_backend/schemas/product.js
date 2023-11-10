@@ -20,21 +20,8 @@ export default {
         hotspot: true,
       },
 
-      validation: Rule => Rule.custom(images => {
-        if (!images || !Array.isArray(images)) {
-          return true; // No images to validate, so it's valid
-        }
 
-        const maxSizeInBytes = 2 * 1024 * 1024; // 2MB in bytes
-
-        const oversizedImages = images.filter(image => image.size > maxSizeInBytes);
-        if (oversizedImages.length > 0) {
-          return 'Some images exceed the maximum size of 2MB.';
-        }
-
-        return true; // All images are within size limits
-      }),
-
+      validation: Rule => Rule.required(),
     },
     {
       name: 'name',
@@ -76,7 +63,6 @@ export default {
       title: 'Discounted Price [Price after discounting]',
       type: 'number',
       validation: Rule => Rule.max(Rule.valueOfField('listPrice'))
-
     },
 
     {

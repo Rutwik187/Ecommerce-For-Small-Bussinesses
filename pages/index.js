@@ -53,7 +53,7 @@ const Home = ({ miniBannerData, featureProductsData, bannerData, categories, pro
       <Brands brands={brandData} />
     </div>
     <Footer info={infoData} />
-    <a target='_blank' href={`https://wa.me/91${infoData[0].phoneNo}?`}>
+    <a target='_blank' href={infoData[0] ? `https://wa.me/91${infoData[0].phoneNo}?` : ""}>
 
       <IconContext.Provider value={{ color: "green" }}>
 
@@ -62,7 +62,7 @@ const Home = ({ miniBannerData, featureProductsData, bannerData, categories, pro
 
       </IconContext.Provider>;
     </a>
-  </div>
+  </div >
 );
 
 export const getServerSideProps = async () => {

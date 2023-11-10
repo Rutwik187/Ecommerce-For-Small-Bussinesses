@@ -1,17 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
+import { urlFor } from "../lib/client";
 
 import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  borderRadius: "16px",
-};
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 export default function CheckoutModal({
   coupon,
@@ -111,74 +104,98 @@ export default function CheckoutModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box
+          className="absolute left-1/2 transform -translate-x-1/2 pt-20 w-[400px] h-full rounded-2xl sm:w-[600px] scrollbar-hide"
+          sx={{ overflow: "scroll" }}
+        >
           <div className="bg-gray-100 rounded-xl px-8">
+            <AiOutlineCloseCircle
+              className="w-16 h-16 absolute right-0 p-2 cursor-pointer"
+              onClick={handleClose}
+            />
             <div className="container mx-auto py-8">
               <h1 className="text-2xl font-bold mb-6 text-center">
                 Checkout Form
               </h1>
-              <form className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    for="name"
-                  >
-                    Name
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Rajesh Verma"
-                    ref={name}
-                    required
+              <div>
+                <form className="w-full mx-auto bg-white p-8 rounded-md shadow-md flex flex-col gap-4 sm:gap-8">
+                  <div>
+                    <div className="mb-4">
+                      <label
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                        for="name"
+                      >
+                        Name
+                      </label>
+                      <input
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Rajesh Verma"
+                        ref={name}
+                        required
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-gray-700 text-sm font-bold mb-2">
+                        Phone Number
+                      </label>
+                      <input
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                        type="number"
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        placeholder={mobileNumber}
+                        ref={phoneNo}
+                        required
+                        onChange={handlePhoneChange}
+                      />
+                      {phoneError && (
+                        <p className="text-red-500 text-sm">{phoneError}</p>
+                      )}
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                        for="password"
+                      >
+                        Address
+                      </label>
+                      <textarea
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                        id="address"
+                        name="address"
+                        placeholder="address"
+                        ref={address}
+                        onChange={handleAddressChange}
+                        required
+                      />
+                      {addressError && (
+                        <p className="text-red-500 text-sm">{addressError}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <img
+                    src={
+                      info[0]
+                        ? info[0].payQR
+                          ? urlFor(info[0].payQR).url()
+                          : ""
+                        : ""
+                    }
+                    alt="Payment QR"
+                    className="object-contain"
                   />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-                    type="number"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    placeholder={mobileNumber}
-                    ref={phoneNo}
-                    required
-                    onChange={handlePhoneChange}
-                  />
-                  {phoneError && (
-                    <p className="text-red-500 text-sm">{phoneError}</p>
-                  )}
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    for="password"
-                  >
-                    Address
-                  </label>
-                  <textarea
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-                    id="address"
-                    name="address"
-                    placeholder="address"
-                    ref={address}
-                    onChange={handleAddressChange}
-                    required
-                  />
-                  {addressError && (
-                    <p className="text-red-500 text-sm">{addressError}</p>
-                  )}
-                </div>
-                <div className="mb-4">
+                </form>
+                <div className="mb-4 mt-4">
                   <i
                     className="block text-gray-700 text-sm font-bold mb-2"
                     for="confirm-password"
                   >
-                    Also share whatsApp location for convenience if possible
+                    Also share whatsApp location and payment screenshot for
+                    convenience
                   </i>
                 </div>
 
@@ -189,7 +206,7 @@ export default function CheckoutModal({
                 >
                   Place order on WhatsApp
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </Box>
