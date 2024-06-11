@@ -1,14 +1,14 @@
 import React, { useCallback, useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+// import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import { urlFor } from "../lib/client";
 
 const HeroBanner = ({ heroBanner }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 8000, stopOnMouseEnter: true }),
-    WheelGesturesPlugin(),
+    Autoplay({ delay: 8000 }),
+    // WheelGesturesPlugin(),
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);

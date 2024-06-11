@@ -1,7 +1,7 @@
 import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+// import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import "react-multi-carousel/lib/styles.css";
 import Product from "./Product";
@@ -10,7 +10,7 @@ import Category from "./Category";
 const RelatedProducts = ({ products }) => {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 1000, stopOnMouseEnter: false }),
-    WheelGesturesPlugin(),
+    // WheelGesturesPlugin(),
   ]);
 
   return (

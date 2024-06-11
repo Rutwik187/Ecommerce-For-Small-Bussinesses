@@ -359,7 +359,7 @@
   opacity: 0;
 }
 .selected img {
-  max-width: 10rem !important;
+  /* max-width: 10rem !important; */
 }
 .productCarousel.carousel-root .carousel .thumb.selected,
 .productCarousel.carousel-root .carousel .thumb:hover {

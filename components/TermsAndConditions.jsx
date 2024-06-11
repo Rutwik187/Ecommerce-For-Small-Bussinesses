@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { PortableText } from "@portabletext/react";
+// import { PortableText } from "@portabletext/react";
 import { RichTextComponent } from "./RichTextComponent";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
@@ -38,10 +38,10 @@ const TermsAndConditions = ({ info }) => {
                   Terms and Conditions
                 </h1>
                 <div className="prose max-w-none pt-8">
-                  <PortableText
+                  {/* <PortableText
                     value={info[0] ? info[0].termsAndConditions : []}
                     components={RichTextComponent}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>

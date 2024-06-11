@@ -1,14 +1,14 @@
 import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+// import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import { urlFor } from "../lib/client";
 
 const MiniBanners = ({ miniBanner }) => {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [
     Autoplay({ delay: 8000, stopOnMouseEnter: true }),
-    WheelGesturesPlugin(),
+    // WheelGesturesPlugin(),
   ]);
 
   return (

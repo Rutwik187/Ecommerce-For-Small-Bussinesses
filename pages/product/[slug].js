@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { client } from '../../lib/client';
-import { Footer, Product, RelatedProducts } from '../../components';
+import { client } from "../../lib/client";
+import { Footer, Product, RelatedProducts } from "../../components";
 
 import { IoMdHeartEmpty } from "react-icons/io";
 import Wrapper from "../../components/Wrapper";
 import ProductDetailsCarousel from "../../components/ProductDetailsCarousel";
 import { PortableText } from "@portabletext/react";
-import { RichTextComponent } from '../../components/RichTextComponent';
-
+import { RichTextComponent } from "../../components/RichTextComponent";
 
 // import ReactMarkdown from "react-markdown";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,7 +15,7 @@ import { addToCart } from "../../store/cartSlice";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from '../../components/Header';
+import Header from "../../components/Header";
 
 const ProductDetails = ({ product, products, infoData, categories }) => {
   const { image, name, description, listPrice, discountedPrice } = product;
@@ -24,14 +23,14 @@ const ProductDetails = ({ product, products, infoData, categories }) => {
 
   const notify = () => {
     toast.success(`Added ${name} to your cart!`, {
-      position: 'bottom-right',
+      position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: 'light',
+      theme: "light",
     });
   };
 
@@ -69,14 +68,18 @@ const ProductDetails = ({ product, products, infoData, categories }) => {
                     &#8377;{listPrice}
                   </p>
                   <p className="ml-auto text-base font-medium text-green-500">
-                    {Math.round(((listPrice - discountedPrice) / listPrice) * 100)}
+                    {Math.round(
+                      ((listPrice - discountedPrice) / listPrice) * 100
+                    )}
                     % off
                   </p>
                 </>
               )}
             </div>
 
-            <div className="text-md font-medium text-black/[0.5]">incl. of taxes</div>
+            <div className="text-md font-medium text-black/[0.5]">
+              incl. of taxes
+            </div>
             <div className="text-md font-medium text-black/[0.5] mb-4">
               {`(Also includes all applicable duties)`}
             </div>
@@ -159,9 +162,8 @@ const ProductDetails = ({ product, products, infoData, categories }) => {
               <div className="text-lg font-bold mb-5">Product Details</div>
               <div className="markdown text-md mb-5">
                 <PortableText
-                  // Pass in block content straight from Sanity.io
                   value={description}
-                // components={RichTextComponent}
+                  components={RichTextComponent}
                 />
               </div>
             </div>
